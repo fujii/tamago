@@ -130,12 +130,14 @@ install-site: all
 	  do  \
 	    ${INSTALL_DATA}  $${FILE} ${lispdir}/egg/egg; \
 	  done; \
+	touch ${lispdir}/egg/egg/.nosearch; \
 #
 	mkdir ${lispdir}/egg/its ; \
 	for FILE in ${ITSSRCS} ${ITSELCS} ; \
 	  do  \
 	    ${INSTALL_DATA}  $${FILE} ${lispdir}/egg/its ; \
 	  done; \
+	touch ${lispdir}/egg/its/.nosearch; \
 
 
 uninstall-site:

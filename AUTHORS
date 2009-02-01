@@ -1,0 +1,32 @@
+KAWABATA, Taichi  <kawabata@exa.onlab.ntt.co.jp>
+	Menudiag improvement.
+
+MORIOKA Tomohiko  <tomo@etl.go.jp>
+	Use of custom.
+
+NIIBE Yutaka <gniibe@m17n.org>
+	Design a part of ITS programming.
+	Wrote ITS:
+	    its.el
+	    its/hira.el
+	Wrote egg.el, menudiag.el, egg-cnv.el, egg-com.el,
+	and egg-mlh.el.
+	Wrote backend conversion engine interface:
+	    ANTHY: egg/anthy.el, egg/anthyipc.el, 
+	    SJ3: egg/sj3.el, egg/sj3rpc.el,
+	    WNN: egg/wnn.el, and egg/wnnrpc.el.
+
+KATAYAMA Yoshio <kate@pfu.co.jp>
+	Design ITS programming.
+	Wrote its/hangul.el, its/erpin.el, its/pinyin.el, 
+	its/thai.el, and its/zhuyin.el.
+
+Satoru Tomura <tomura@etl.go.jp>
+	Designer/Implementor/Maintainer of EGG through V3.0.
+	Discussion/Design around ITS.
+	Suggestion around how to write code in LISP.
+
+Hisashi Miyashita <himi@bird.scphys.kyoto-u.ac.jp>
+	Wrote CCL routines in tamago-com.el.
+
+

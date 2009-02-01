@@ -1,0 +1,371 @@
+2001-12-01  ?
+
+	* egg/wnn.el (wnn-server-info-list): Use `defvar' instead of
+	`defconst' to define it.
+
+2001-12-01  KATAYAMA Yoshio  <kate@pfu.fujitsu.com>
+
+	* egg-x0213.el: New file.
+
+2001-11-10  Kinji Itoh  <kinji-i@gray.plala.or.jp>
+	(cf. http://cgi18.plala.or.jp/nyy/canna/canna-20011023-20011110.diff)
+
+	* egg/canna.el (canna-server-port): Default to the string "canna".
+	(cannna-open): Treat the port name as a string instead of a number.
+
+2001-11-08  Kinji Itoh  <kinji-i@gray.plala.or.jp> (cf. [tamago:00546])
+
+	* egg/canna.el (canna-set-converted-yomi): New function.
+	(canna-start-conversion): Use it.
+	(canna-change-bunsetsu-length): Use it.
+
+2001-10-22  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
+	(cf. [tamago:00534])
+
+	* egg/canna.el (canna-word-delete-regist): Signal an error using
+	`egg-error' if there is no text for yomi.
+
+2001-08-16  KATAYAMA Yoshio  <kate@pfu.fujitsu.com> (cf. [tamago:00516])
+
+	* its/greek.el: New file.
+
+2001-07-24  KATAYAMA Yoshio  <kate@pfu.fujitsu.com> (cf. [tamago:00504])
+
+	* eggrc (wnn7-jserver-setup): New function.
+
+2001-06-28  Yoshiki Hayashi  <yoshiki@xemacs.org> (cf. [tamago:00468])
+
+	* egg-cnv.el (egg-end-of-conversion-buffer): Replace
+	`next-single-property-change' to `egg-next-single-property-change'.
+	(egg-decide-before-point): Ditto.
+	(egg-exit-conversion): Ditto.
+	(egg-abort-conversion): Ditto.
+
+	* egg.el (egg-last-method-name): Default to nil.
+
+	* its-keydef.el: Set the default value of `its-select-func-alist'
+	to nil.
+
+	* its.el (its-current-language): Default to nil.
+	(its-mode-map): Use `(meta KEY)' instead of `M-KEY'.
+
+	* egg/canna.el (canna-open): Use `binary' instead of
+	`no-conversion' for the process coding-system.
+	* egg/sj3.el (sj3-open): Ditto.
+	* egg/wnn.el (wnn-open): Ditto.
+
+	* egg/wnnrpc.el (wnnrpc-with-temp-buffer): Use `binary' instead of
+	`no-conversion'.
+	(wnnrpc-with-write-file): Ditto.
+
+2001-05-24  KATAYAMA Yoshio  <kate@pfu.fujitsu.com> (cf. [tamago:00462])
+
+	* its/aynu.el: Require `cl' when compiling.
+
+2001-05-23  Katsumi Yamaoka  <yamaoka@jpl.org> (cf. [tamago:00461])
+
+	* egg.el: Require `cl' only when compiling.
+	* its.el: Ditto.
+
+2001-05-22  KATAYAMA Yoshio <kate@pfu.fujitsu.com>
+
+	* its.el (its-delete-by-character): New customizable variable.
+	(its-delete-backward-SYL): Delete a character as a unit even if
+	just after input, if its-delete-by-character is non-NIL.
+
+2001-04-16  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* egg.el (egg-setup-invisibility-spec): New function for setup
+	buffer-invisibilty-spec.
+
+	* its.el (its-setup-fence-mode): Change the value of invisible
+	property to egg.
+
+	* egg-cnv.el (egg-convert-region): Change the value of invisible
+	property to egg.
+
+        * jisx0213.el: Correct JIS X 0213 definition. (suggested by
+        T. Kawabata)
+
+2000-06-02  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* egg/wnn.el (wnn): Fix docstring.
+	(wnn-backend-plist): Include egg-special-candidate.
+	(wnn-special-candidate): New function.
+	(wnn-pinyin-zhuyin-bunsetsu, wnn-pinyin-zhuyin-string): New
+	functions.
+	(egg-activate-wnn): Fix docstring.
+
+	* egg/sj3.el (sj3, egg-activate-sj3): Fix docstring.
+
+	* egg/canna.el (egg-activate-canna): Fix docstring.
+
+	* menudiag.el: Mostly rewritten.
+
+	* leim-list.el: Docstrings for autoload fixed.
+
+	* its.el (its): Fix docstring.
+	(its-mode-map): Fix bindings.
+	(its-fence-mode, egg-sub-mode-map-alist): New variables.
+	(its-enter/leave-fence): New function.
+	(its-put-cursor): Add text properties point-entered, point-left,
+	modification-hooks.
+	(its-in-fence-p): Check also read-only property.
+	(its-hiragana, its-katakana): Just call its-convert.
+	(its-hankaku, its-japanese-hankaku): These functions deleted.
+	(its-full-half-table, its-half-full-table): New variables.
+	Initialize them.
+	(its-half-width, its-full-width): New functions.
+	(its-convert): Args changed.
+
+	* its-keydef.el (its-make-select-func): Add check by
+	(egg-conversion-fence-p).
+
+	* egg.el (egg): Fix docstring.
+	(egg-current-keymap): This variable deleted.
+	(egg-mode-map-alist, egg-sub-mode-map-alist): New variables.
+	(define-egg-mode-map): New macro.
+	(modefull, modeless): New egg mode maps.
+	(egg-enter/leave-fence-hook): New variable.
+	(egg-enter/leave-fence): New function.
+	(egg-activated): New variable.
+	(egg-activate-keymap): New variable.
+	(egg-modify-fence, egg-post-command-func): New functions.
+	(egg-change-major-mode-buffer): New variable.
+	(egg-activate-keymap-after-command, egg-change-major-mode-func):
+	New functions.
+	(egg-mode): Initialize egg-modefull-mode, egg-modeless-mode.
+	(egg-modefull-map, egg-modeless-map): These functions deleted.
+	(egg-set-face): Preserve the current modification-hooks property.
+
+	* egg-com.el (ccl-decode-egg-binary): Fix BUFFER-MAGNIFICATION.
+	(ccl-encode-egg-binary): Likewise.
+
+	* egg-cnv.el (egg-conv): Fix docstring.
+	(egg-conversion-auto-candidate-menu): Fix docstring.
+	(egg-conversion-auto-candidate-menu-show-all): New variable.
+	(egg-conversion-sort-by-converted-string): New variable.
+	(egg-conversion-fence-p): New function.
+	(egg-define-backend-functions): Include egg-special-candidate.
+	(egg-conversion-map): Define up, down, etc.
+	(egg-conversion-mode): New variable.  Register it in
+	egg-sub-mode-map-alist.
+	(egg-conversion-enter/leave-fence): New function.  Register it in
+	egg-enter/leave-fence-hook.
+	(egg-exit-conversion-unread-char): Use single setq.
+	(egg-make-bunsetsu): Add text properties point-entered and
+	point-left.
+	(egg-set-menu-mode-in-use, egg-unset-menu-mode-in-use)
+	(egg-set-candsel-info): Args changed.
+	(egg-get-candsel-target-major): Code changed.
+	(egg-get-candsel-target-minor): Code changed.
+	(egg-insert-new-bunsetsu): Args changed.
+	(egg-candidate-select-counter): Make it buffer local.
+	(egg-next-candidate-internal): Args changed.
+	(egg-sort-item): New functions.
+	(egg-select-candidate-major): New arg SORT.
+	(egg-select-candidate-minor, egg-select-candidate-list-all-major)
+	(egg-select-candidate-list-all-minor)
+	(egg-select-candidate-internal): Likewise.
+	(egg-hiragana): New function.
+	(egg-katakana, egg-pinyin, egg-zhuyin, egg-hangul): Aliases of
+	egg-hiragana.
+	(egg-special-convert): New function.
+	(egg-enlarge-bunsetsu-internal): Code changed.
+	(egg-reconvert-bunsetsu-internal, egg-decide-before-point)
+	(egg-decide-first-char, egg-exit-conversion)
+	(egg-abort-conversion): Likewise.
+
+2000-02-01  Takanori Saneto  <sanewo@ba2.so-net.ne.jp>
+
+	* egg/sj3rpc.el (sj3rpc-tanbunsetsu-conversion): should use
+	  let* instead of let.
+
+2000-01-20  Katsumi Yamaoka <yamaoka@jpl.org>
+
+	* egg/sj3.el (sj3-word-registration): New function.
+	(sj3-hinshi-select): New function.
+	(sj3-dictionary-select): New function.
+	(sj3-conversion-backend): Add `sj3-word-registration'.
+	(sj3-hinshi-name): New function.
+	(sj3-hinshi-menu): New variable.
+	(sj3-register-2, sj3-register-1): Add messages.
+	(sj3-server-coding-system-list): Remove.
+	(sj3-server-version): Move to egg/sj3rpc.el.
+	(sj3-server-port, sj3-hostname): Strip "*" from the doc string.
+
+	* egg/sj3rpc.el (sj3rpc-add-word): New function.
+	(sj3rpc-kugiri-stdy, sj3rpc-get-bunsetsu-candidates): Use
+	`sj3-server-coding-system' insted of `sj3rpc-server-coding-system'.
+	(sj3rpc-tanbunsetsu-conversion, sj3rpc-get-bunsetsu-candidates-sub,
+	sj3rpc-begin): Use `sj3-server-coding-system' insted of
+	`sj3rpc-server-coding-system'; don't specify an argument of
+	`sj3rpc-unpack-mb-string'.
+	(sj3rpc-unpack-mb-string): Don't allow the argument; use
+	`sj3rpc-server-coding-system'.
+	(sj3rpc-server-coding-system): Remove macro.
+	(sj3-const): Switch on the return value of `sj3-sjis-p' instead of
+	`sj3-server-version'.
+	(sj3-sjis-p): New macro.
+	(sj3-server-coding-system): New variable; default to `shift_jis'.
+	(sj3-server-version): Move from egg/sj3.el; use `defvar' insted of
+	`defcustom'.
+
+	* eggrc: Remove SJ3 stuff.
+
+2000-01-17  TOMURA Satoru <tomura@etl.go.jp>
+
+	* Version 4.0.6 released
+	
+2000-01-17  TOMURA Satoru <tomura@etl.go.jp>
+
+	* README.ja.text: mentiond about doc/lc99.text
+	
+2000-01-17  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-hiragana, its-katanaka): modified
+	(its-zenkaku, its-hankaku): added
+	(its-put-cursor): bug fixed.
+	(its-set-cursor-status): redefined.
+	(its-search-beginning, its-search-end): created.
+	(its-end-of-input-buffer): modified.
+	(its-kill-line): modified.
+	(its-cancel-input): modified.
+	(its-japanese-hankaku): added.
+	(its-convert): added.
+	* egg.el (egg-redraw-face): bug fixed.
+	
+2000-01-17  SAKAI Kiyotaka <ksakai@kso.netwk.ntt-at.co.jp>
+	
+	* its.el (its-hiragana, its-katakana): re-added.
+	
+2000-01-17  SANETO Takanori <sanewo@ba2.so-net.ne.jp>
+
+	* Makefile.in: move its-keydefs.el from ITSELS to TOPELS
+	
+2000-01-16
+	
+	* egg-sim.el: many functions renamed and modified...
+	* doc/code-table: created
+	
+2000-01-15  TOMURA Satoru <tomura@etl.go.jp>
+	
+	* egg-sim.el: rename egg-code.el as egg-sim.el
+	* egg-sim.el (egg-simple-input-method): rename
+	egg-insert-character as egg-simple-input-method
+	* egg.el: rename egg-insert-character as egg-simple-input-method
+	* doc/lc99.txt: added.
+	
+2000-01-14  TOMURA Satoru <tomura@etl.go.jp>
+	* egg-code.el: created
+	* egg.el: Bind egg-insert-character to C-^ in egg-mode
+	* egg.el: Delete the binding for C-_ in egg-mode
+	* Makefile.in: add egg-code to ${SRCS}
+	
+2000-01-13  TOMURA Satoru <tomura@etl.go.jp>
+	
+	* Version 4.0.5 released.
+
+2000-01-13  Katsumi Yamaoka <yamaoka@jpl.org>
+	
+	* egg/sj3.el (sj3-end-conversion): Restrain from overrunning.
+	
+2000-01-13  Katsumi Yamaoka <yamaoka@jpl.org>
+	* egg/sj3rpc.el (sj3rpc-open): Use `sj3-server-version' instead of
+	2.
+	(sj3rpc-unpack-mb-string): New macro.
+	(sj3rpc-tanbunsetsu-conversion, sj3rpc-get-bunsetsu-candidates-sub,
+	sj3rpc-begin): Use it instead of `comm-unpack'.
+
+	(sj3rpc-server-coding-system): New macro.
+	(sj3rpc-kugiri-stdy, sj3rpc-tanbunsetsu-conversion,
+	sj3rpc-get-bunsetsu-candidates, sj3rpc-get-bunsetsu-candidates-sub,
+	sj3rpc-begin, sj3rpc-unpack-mb-string): Use it.
+
+	(sj3-const): Switch on the value of `sj3-server-version'.
+	(sj3rpc-kugiri-stdy, sj3rpc-tanbunsetsu-conversion,
+	sj3rpc-get-bunsetsu-candidates, sj3rpc-get-bunsetsu-candidates-sub,
+	sj3rpc-begin): Modify for it.
+
+	* egg/sj3.el (sj3-server-coding-system-list): New user option.
+	(sj3-server-version): Ditto.
+
+2000-01-13  SAKAI Kiyotaka <ksakai@kso.netwk.ntt-at.co.jp>
+
+	* its.el: typo
+	* egg.el: typo
+	
+2000-01-13  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el(its-hiragana, its-katakana): does not work. so deleted.
+	
+2000-01-12  NAKAJI Hiroyuki <nakaji@tutrp.tut.ac.jp>	
+
+	* README.ja.txt: typo
+	* Makefile.in: (clean, distclean): modified.
+
+2000-01-12  TOMURA Satoru <tomura@etl.go.jp>
+	
+	* Version 4.0.4 released.
+	
+2000-01-12  TOMURA Satoru <tomura@etl.go.jp>
+
+	* REAMDE: removed.
+	
+	* README.ja.txt: created.
+	
+2000-01-12  SAKAI Kiyotaka <ksakai@kso.netwk.ntt-at.co.jp>
+
+	* Makefile.in: "clean" removes ${ELCS}.
+	
+	* Makefile.in: "distclean" created.
+	
+2000-01-12  Satoru Tomura  <tomura@etl.go.jp>
+
+	* Version 4.0.3 released.
+	
+2000-01-12  Satoru Tomura  <tomura@etl.go.jp>
+
+	* install-sh: copied from automake distribution
+
+	* configure.in: created
+
+	* Makefile.in: created
+
+	* configure: generated by autoconf
+	
+2000-01-11  Satoru Tomura  <tomura@etl.go.jp>
+
+	* leim-list.el: (defgroup sj3) added.
+
+	* egg/sj3.el (sj3-hosname, sj3-server-port): defcusotm'ed
+
+2000-01-11  Katsumi Yamaoka <yamaoka@jpl.org>
+
+	* egg/sj3.el : (require 'egg) added.
+
+2000-01-11  SAKAI Kiyotaka <ksakai@kso.netwk.ntt-at.co.jp>
+	
+	* its.el (its-hiragana, its-katakana): New functions
+	
+2000-01-07  Tomura Satoru   <tomura@etl.go.jp>
+	
+	* COPYING: The file is added.
+	
+	* ChangeLog.1: The original ChangeLog is renamed as.
+	
+	* ChangeLog: Created.
+	
+2000-01-07  Tomura Satoru   <tomura@etl.go.jp>
+	
+	* Version 4.0.2 released.
+	
+2000-01-06  Tomura Satoru   <tomura@etl.go.jp>
+	
+	* Version 4.0.1 released.
+	
+2000-01-05  Tomura Satoru   <tomura@etl.go.jp>
+	
+	* Version 4.0.0 released.
+	
+

@@ -1,0 +1,77 @@
+backend assoc-list
+toroku-region
+
+(1) Use customize.
+(2) Implement user entries which were defined in EGG V3.
+(3) Packaging
+(4) Modeless Framework
+(5) LEIM
+(7) Portability (Implementation)
+	Event/Char/Integer is different.
+(8) Quail Integration
+
+Something like egg-use-backend, its-use-package
+
+MENU:
+	Incrementally generate <selection-list>.
+	Provide programming interface of the data structure <menu>.
+
+MLH:
+	Rewrite & clean up.
+
+Emacs/Quail Interface:
+	Restrict switching language
+	Synchronize backend/frontend language
+
+ITS:
+	Kill, yank, delete with kill-ring in INPUT-BUFFER.
+	Editing within a VSYL.
+	transpose-chars
+	Use of macro/subst.
+
+	Implement following functions.
+	its-cancel-input
+	its-mode-help-command
+	its-kill-line
+	its-hiragana (input-buffer)
+	its-katakana
+	its-hankaku
+	its-zenkaku
+
+	its-read-current-its-string
+
+	overwrite-mode, fill, vi emulator
+
+	The way of customizing its-mode-map.
+
+	Help-command
+
+	muhenkan
+
+EGG/ITS:
+	Katakana input support.
+	Kanainput support.
+	Chinese/Korean support.
+	map change --> server select.
+	Consider about API
+
+CONVERT:
+	Semantics of open and close
+
+	decide-first-char
+
+	Consistency with other commands (delete, yank...)
+
+	Help command
+
+WNN:
+	Support Wnn6 when it becomes Free Software.
+
+WNNRPC:
+	Chinese/Korean support.
+
+BUG:
+	convert.el
+
+	|xxxxxxx|
+	        ^---- when cursor comes on this fence-end.

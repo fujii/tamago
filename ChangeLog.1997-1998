@@ -1,0 +1,2311 @@
+1998-07-12  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Don't test against
+	egg-conversion-backend-alist.
+
+	* egg/wnn.el (wnn-fini-lang): Reneme from wnn-fini.
+	(wnn-fini): New implementation calling wnn-fini-lang.
+
+	(wnn-close): Call wnn-fini-lang.
+	(wnn-dictionary-save): Ditto.
+
+	* egg/canna.el (canna-fini): Delete LANG argument.
+	* egg/sj3.el (sj3-fini): Ditto.
+
+	* egg-cnv.el (egg-set-conversion-backend): Removed.
+
+	* egg/sj3.el (sj3-start-conversion): Signal error on non-supported
+	language.
+	* egg/canna.el (canna-start-conversion): Likewise.
+	* egg/wnn.el (wnn-start-conversion): Likewise.
+
+	* egg-cnv.el (egg-convert-region): Add handler for
+	lang-not-supported.
+
+	* egg/wnn.el (egg-activate-wnn): load wnnrpc here conditionally.
+	* egg/sj3.el: Likewise.
+	* egg/canna.el: Likewise.
+
+	* egg.el (egg-support-languages, egg-set-support-languages): Removed.
+	(egg-mode): Don't call egg-set-conversion-backend.
+	* egg/{canna.el, wnn.el, sj3.el}: Don't call egg-support-languages.
+
+	* egg-cnv.el (egg-set-current-backend): Removed.
+	(egg-initialize-backend, egg-start-conversion,
+	egg-start-reverse-conversion): Don't call egg-set-current-backend.
+	(egg-conversion-backend-null): Rename from *-other-languages.
+	(egg-conversion-backend-alist): Removed.
+	(egg-conversion-backend): Not buffer local.
+	(egg-finalize-backend-alist): Removed.
+
+1998-07-10  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-cnv.el (egg-start-conversion-failure-hook): New Variable.
+	(egg-start-conversion-failure-fallback): New Function.
+	(egg-convert-region): Handle error and hook on failure.
+
+	* egg/sj3.el (sj3-open): Remove bogus setq-s of sj3-sys-dict-list,
+	sj3-user-dict-list.
+
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Don't emit message
+	"converting...", as it may flush out error message.
+
+	* egg/sj3rpc.el ("egg-com", "egg/sj3"): Require on compilation.
+	(sj3rpc-open): Failure when version is different.
+
+1998-07-03  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its/erpin.el, its/hangul.el, its/hankata.el, its/hira.el,
+	its/jeonkak.el, its/kata.el, its/pinyin.el, its/quanjiao.el,
+	its/thai.el, its/zenkaku.el: Updated using new its-*.
+
+	* its.el (define-its-state-machine): Rewritten.
+	(define-its-compiled-map): Deleted.
+	(define-its-state-machine-append): Rewritten.
+	(its-defrule): Rewritten.
+	(its-defrule*): Rewritten.
+	(its-parent-states): New Variable.
+	(its-goto-state): Remove 2nd optional argument INITIAL-STATE.
+	(its-set-interim-terminal-state): New Function.
+	(its-make-next-state): Remove 2nd argument KEYSEQ.
+
+1998-07-01  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-mlh.el (mlh-hira-to-kata): Removed.  Doesn't work any more.
+	(mlh-katakana): Use japanese-katakana-region.
+
+	* egg-cnv.el (egg-conversion-map): Add again mapping for "/".
+
+1998-06-27  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* egg-cnv.el (egg-abort-conversion): Bug fix.
+
+1998-06-27  NIIBE Yutaka  <gniibe@akebono>
+
+	* egg/wnn.el (wnn-dictionary-specification-list): Don' specify
+	for gerodic/g-jinmei.
+	Suggested by SAKAI Kiyotaka <ksakai@netwk.ntt-at.co.jp>.
+
+1998-06-26  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-cancel-input): Bug fix.
+
+1998-06-26  SAKAI Kiyotaka <ksakai@netwk.ntt-at.co.jp>
+
+	* egg-cnv.el (egg-conversion-mode, egg-help-command): New
+	functions for help string.
+	* its.el (its-mode, its-mode-help-command): Likewise.
+
+1998-06-26  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* egg-cnv.el (egg-convert-region): Bug fix.
+	* egg.el (egg-default-language): Don't use string.
+
+	* its/hankata.el (its-han-kata-enable-double-n, and others):
+	Variable name change (-han-) to distingush kata.el.
+
+	* its/erpin.el (its-erpin-tw-enable-quanjioao-alphabet,
+	its-erpin-cn-enable-quanjioao-alphabet): 
+	See its-enable-fullwidth-alphabet.
+	* its/kata.el (its-kata-enable-zenkaku-alphabet): Likewise.
+	* its/pinyin.el (its-pinyin-cn-enable-quanjioao-alphabet): Likewise.
+	* its/zenkaku.el (its-zenkaku-down-map): Likewise.
+
+	* its/erpin.el (its-erpin-tw-map): Bug fix for "\\", "{", "}", and
+	"/".
+	* its/pinyin.el (its-pinyin-cn-map): Ditto.
+	* its/quanjiao.el (its-quanjiao-down-tw-map): Ditto.
+	* its/zhuyin.el (its-zhuyin-cn-enable-quanjioao-alphabet): Ditto.
+
+	* its/hira.el (its-hira-enable-zenkaku-alphabet): Follow changes
+	of its.el.
+	* its/ascii.el (its-up-map, its-down-map): Ditto.
+	* its/jeonkak.el (its-jeonkak-up-map): Ditto.
+
+	* its/hira.el (its-hira-enable-zenkaku-alphabet): 
+	See its-enable-fullwidth-alphabet.
+
+	* egg/wnn.el (wnn-save-dictionaries): Rewritten.
+
+	* egg/canna.el (egg-edep): Required.
+	(canna-support-languages): Use symbol.
+	* egg/sj3.el (egg-edep): Likewise.
+
+	* egg/wnn.el (egg-edep): Likewise.	
+	* egg/wnnrpc.el: Use symbol.
+
+	* menudiag.el (menudiag-mode-map): Bug fix for boundary conditions.
+	(menudiag-make-selection-list): Bug fix in case of many items.
+
+	(menudiag-forward-item, menudiag-backward-item,
+	menudiag-goto-line): Change so that it wraps.
+
+	* its.el (egg-edep): Required.
+	(its-keydef): Require unconditioanlly.
+	(its-mode-map): Don't call its-define-select-keys here.
+	(its-mode-map): Use of symbol as keymap.
+	(its-fence-invisible): New variable.
+	(its-put-cursor): Don't call its-define-select-keys.
+	(its-setup-fence-mode): invisible handling and its-define-select-keys.
+	(its-keyseq-acceptable-p): if (CDR SYL) is number, return NIL.
+	(define-its-state-machine): Introduce its-temporaly-map.
+	(define-its-state-machine-append): Likewise.
+
+	(its-goto-state): Use symbol as keymap, not directly.
+
+	(its-set-part-1,its-set-part-2): New function.
+	(its-delete-backward-within-SYL): Conditionalize.
+
+	* egg.el (egg-edep): Required.
+	(egg-mode): Add remove-hook call.
+	Supply NIL as first argument to egg-set-conversion-backend.
+	make-local-hook for input-method-activate-hook.
+	(egg-set-face): Add optional argument OBJECT.
+	(egg-redraw-face): Bind inhibit-point-motion-hooks.
+
+	* egg.el (set-buffer-multibyte): Move to egg-edep.el.
+
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Use assq.
+
+	* egg-com.el (egg-zhuyin-syllable): compatibility change.
+	(encode-fixed-euc-china-region): Removed maxlen.
+
+	Really Needed? -- gN.
+	* egg-com.el (egg-pinyin-syllable): Check exact match.
+	(egg-zhuyin-syllable): Likewise.
+
+	* egg-cnv.el (egg-edep): Required.
+	(its-keydef): Not required.
+	(egg-conversion-map): Don't call its-define-select-keys here.
+	Fset it to use symbol instead of the map directly.
+
+	(egg-get-bunsetsu-info): Add new optional argument for getting
+	property.
+	(egg-start-conversion-other-languages): set egg-conversion-backend.
+	(egg-set-current-backend): Use assq instead of assoc.
+	(egg-get-conversion-face): Likewise.
+	(egg-conversion-invisible): New variable.
+	(egg-convert-region): Change for open/close delimiter.
+	(egg-chinese-sisheng-regexp): New function.
+	(egg-separate-languages): Use egg-chinese-sisheng-regexp,
+	use symbol for language specifier (instead of string).
+
+	(egg-charset-to-language): Use symbol for language specifier
+	(instead of string).
+	(egg-next-chinese-lang): Likewise.
+
+	(egg-next-part-lang): Change the arguments.
+
+	(egg-make-bunsetsu): New function changing egg-insert-bunsetsu.
+
+	(egg-separate-characters): compatibility changes.
+
+	(egg-conversion-wrap-select): New Variable.
+
+	(egg-next-candidate): Can wrap around.
+
+	(egg-decide-before-point): Rewritten.
+	(egg-abort-conversion): Back to previous one.
+	(egg-select-candidate): Use egg-make-bunsetsu.
+
+	* egg-edep.el: New File for handling differences between Emacs version.
+	* its/thai.el: New File.
+	* its/hangul.el: Updated.
+
+1998-06-26  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Makefile (install): Don't touch .emacs and leim-list.el
+	directly.  User should do it by her hand.
+	Reported by SAKAI Kiyotaka <ksakai@netwk.ntt-at.co.jp>
+
+1998-06-25  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg/canna.el (canna-dictionary-specification): "user" instead of
+	("user").  Should chnage canna-filename later.
+	Reported by Akio Morita <amorita@bird.scphys.kyoto-u.ac.jp>.
+
+1998-04-02  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-com.el (comm-unpack-u16-string): Call string-as-multibyte.
+	(comm-unpack-mb-string): Likewise.
+
+	* egg.el (set-buffer-multibyte): Function for Emacs 20.2.
+
+	* egg/wnn.el (wnn-open): Call set-buffer-multibyte.
+	* egg/sj3.el (sj3-open): Ditto.
+	* egg/canna.el (canna-open): Ditto.
+
+1998-04-02  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	Implement hilight.
+	* egg.el (egg-mark-list, egg-suppress-marking): New Variables.
+	(egg-set-face, egg-mark-modification, egg-redraw-face): New
+	Functions.
+	* its.el (its-buffer-ins/del-SYL): Call egg-set-face.
+	(its-setup-yanked-portion): Likewise.
+	* egg-cnv.el (egg-insert-bunsetsu): Call egg-set-face.
+
+	* egg.el (egg-mode): set default backend.
+	* egg-mlh.el (mlh-space-bar-backward-henkan): activate input
+	method.
+
+1998-04-02  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-cnv.el (egg-decide-bunsetsu): Undo changes of 03-16.
+	(egg-abort-conversion): Call egg-end-conversion.
+	(egg-decide-before-point): Call egg-end-conversion widh ABORT=NIL.
+
+1998-03-16  NIIBE Yutaka  <gniibe@chroot.org>
+
+	CANNA Support.
+	* egg/canna.el, egg/cannarpc.el: New file.
+	* Makefile (SRCS): Added.
+
+	* egg-cnv.el (egg-end-conversion): Add argument ABORT.
+
+	* egg/wnn.el (wnn-end-conversion): Follow the change of 
+	EGG-END-CONVERSION.
+	* egg/sj3.el (sj3-end-conversion): Likewise.
+
+1998-03-15  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Makefile: Add dependencies for its-keydef.elc.
+	* egg/sj3rpc.el (sj3-open): Don't support list of hosts.
+	* its.el (its-exit-mode, its-kick-convert-region): Bug fix.  Call
+	its-input-end and its-put-cursor.
+	(its-exit-mode-off-input-method): Removed. 
+
+1998-03-14  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* docomp.el (its-keydef): Undo the changes of 03-09.  its.el
+	is fixed.
+
+	* egg-cnv.el (egg-current-language): New valiable.
+	(egg-bunsetsu-info): Separate bunsetsu-info and lunguage.
+	(egg-conversion-backend-other-languages
+	egg-init-other-languages
+	egg-start-conversion-other-languages
+	egg-get-bunsetsu-converted-other-languages
+	egg-get-bunsetsu-source-other-languages
+	egg-list-candidates-other-languages
+	egg-get-number-of-candidates-other-languages
+	egg-get-current-candidate-number-other-languages
+	egg-get-all-candidates-other-languages
+	egg-decide-candidate-other-languages
+	egg-change-bunsetsu-length-other-languages
+	egg-end-conversion-other-languages
+	egg-fini-other-languages): New valiable and functions for
+	handling unknown language.
+	(egg-set-current-backend): Set egg-conversion-backend-other-languages
+	when backend for specified language isn't found.
+	(egg-start-reverse-conversion): New function for reverse conversion.
+	(egg-set-conversion-backend-internal): Removed.
+	(egg-set-conversion-backend): Args are changed.
+	(egg-get-conversion-face): New function for different face for
+	every language.
+	(egg-convert-region): Make converting text read-only. Handle
+	unknown laguages and backend opening error. Rename its-lang to
+	egg-lang.
+	(egg-separate-languages): Argument use-context is added to
+	utilize context when called by its-yank. Rename its-lang to
+	egg-lang Improve speed.
+	(egg-charset-to-language): Renamed from egg-char-to-language.
+	(egg-next-part-lang egg-next-chinese-lang): Rename its-lang to
+	egg-lang.
+	(egg-conversion-map): Unbind C-\ and /. Bind C-X RET XXX to
+	its-select-XXX.
+	(egg-insert-bunsetsu): Make conversion text read-only. Separate
+	bunsetsu-info and conversion-backend. 
+	(egg-insert-bunsetsu-list): Remove redundant variables.
+	(egg-beginning-of-conversion-buffer): New function.
+	(egg-end-of-conversion-buffer): New function.
+	(egg-enlarge-bunsetsu): Handle read-only text.
+	(egg-next-candidate): Handle read-only text. Bug on no candidate
+	bunsetsu is fiexed.
+	(egg-reconvert-bunsetsu-internal egg-reverse-convert-bunsetu
+	egg-reconvert-bunsetsu): New functions for reverse conversion and
+	re-conversion.
+	(egg-decide-before-point egg-abort-conversion): Handle read-only
+	text. Bug on pinyin and zhuyin mixed conversion is fixed. Allow
+	long fence.
+	(egg-select-candidate): Handle read-only text. Bug on no candidate
+	bunsetsu is fiexed.
+
+	* egg-com.el: Change coding-system from internal to iso-2022-7bit.
+
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Disable temporally
+	mode selection.
+
+	* egg.el (egg-mode): Set cureent lang to conversion backend.
+	(egg-set-mode-line-title): Renamed to its-set-mode-line-title
+	and moved to its.el.
+	(egg-check-language): Removed.
+
+	* egg/sj3.el (sj3-server-port): Change from defconst to defver for
+	user customization.
+	(sj3-open sj3-get-environment): Try opening alternate servers.
+	(sj3-start-conversion): Make second argument LANGUAGE optional.
+	(egg-activate-sj3): Parameters of egg-set-conversion-backend is
+	changed.
+
+	* egg/sj3rpc.el (sj3rpc-error-message): New constant (Not yet
+	completed).
+	(sj3rpc-get-error-message): Check range of errno to avoid
+	args-out-ou-range error.
+
+	* egg/wnn.el (wnn-jport wnn-cport wnn-tport wnn-kport): New
+	variables for user customization.
+	(wnn-server-info-list wnn-server-port): Type of fourth element
+	is changed from integer to symbol.
+	(wnn-start-reverse-conversion): New function.
+	(wnn-open wnn-get-environment): Try opening alternate servers.
+	(egg-activate-wnn): Parameters of egg-set-conversion-backend is
+	changed.
+
+	* its-keydef.el (its-current-language): Moved to its.el.
+	(its-make-select-func): Remove language check (egg-check-language).
+	Add temporally mode selection.
+	(its-do-list-make-select-func): Binding of zhuyin-tw is changed to
+	`C' because conflicting zenkaku-upcase.
+
+	* its.el (its-current-select-func its-previous-select-func): New
+	variables for temporally mode selection.
+	(its-keydef requiring): Use eval-when to avoid error on using
+	compiled file.
+	(its-get-fence-face): New function for different face for
+	every language.
+	(its-put-cursor its-setup-fence-mode): Make fence read-only.
+	(its-start): Remove force-mode-line-update calling.
+	(its-restart): Add optional argument set-prop.
+	(its-self-insert-char its-backward-SYL its-forward-SYL
+	its-delete-SYL its-delete-backward-SYL its-exit-mode
+	its-delete-backward-SYL-by-keystroke its-transpose-chars
+	its-kick-convert-region its-end-of-input-buffer): Handle read-only
+	fence.
+	(its-state-machine): Accept special actions to handle temporally
+	mode selection.
+	(its-buffer-ins/del-SYL its-ins/del-SYL-batch): Handle read-only
+	fence. Property its-lang is renamed to egg-lang.
+	(its-get-next-state its-make-next-state): Add type check to avoid
+	wrong-type-argument error.
+	(its-keyseq-acceptable-p): Save informations of its-map to avoid
+	confusing on temporally mode selection.
+	(its-defrule-select-mode-temporally): New macro.
+	(its-kill-line its-cancel-input): New function.
+	(its-delete-backward-within-SYL): Bind its-current-language to
+	avoid confusing when undo is done beyond language change.
+	(its-yank its-yank-pop its-setup-yanked-portion): New functions.
+	(its-exit-mode-internal): Reset temporally selected mode. Allow
+	long fence.
+	(its-kick-convert-region-or-self-insert): New function.
+	(its-translate-region): Remove text properties completly.
+	(its-set-mode-line-title): Moved from egg.el and renamed.
+	(its-select-mode-temporally its-select-previous-mode): New functions
+	for temporally mode selection.
+
+	* leim-list-egg.el: Secondary argument for egg-activate-sj3/wnn
+	is no longer needed.
+
+	* its/hira.el: Remove the rule for "~" which destroies the rules
+	with its-hankaku-escape.
+
+	* its/pinyin.el: Implement its-pinyin-cn-enable-quanjioao-alphabet
+	and its-pinyin-tw-enable-quanjioao-alphabet.
+
+	* its/hangul.el: Implement its-hangul-enable-quanjioao-alphabet.
+
+	* its/ascii.el: New file.
+	* its/erpin.el: New file.
+	* its/hankata.el: New file.
+	* its/jeonkak.el: New file.
+	* its/kata.el: New file.
+	* its/quanjiao.el: New file.
+	* its/zenkaku.el: New file.
+	* its/zhuyin.el: New file.
+
+1998-03-14  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg/sj3rpc.el (sj3rpc-close): New function.
+
+	* egg/sj3.el (sj3bunsetsu-[sg]et-kugiri-changed): Rename from
+	sj3bunsetsu-get-stdy-down.
+	(sj3-end-conversion): Implement CLSTDY.
+	(sj3-fini): Implemented.
+
+1998-03-10  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg/sj3.el (sj3-end-conversion): Implement bunsetsu study.
+	CLSTDY not yet.
+
+	* egg/sj3rpc.el (sj3rpc-get-bunsetsu-candidates-sub): Bug fix.
+	Always add hiragana and katakana candidates.
+	(sj3-const: CLSTDY, CLSTDY_EUC): Renamed from END and END_EUC
+	according to "sj3cmd.h" of SJ3 distribution.
+	(sj3rpc-bunsetsu-stdy, sj3rpc-kugiri-stdy): New functions.
+
+	* egg-com.el (comm-format-u8-vector): New substitution.
+	(comm-format): New format 'v'.
+
+1998-03-09  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* docomp.el (its-keydef): Require its-keydef when compile.
+	Not so good.  Just a work around.
+	(its-mode-map): Undo the changes of 03-04.
+	
+1998-03-09  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-translate-region): Make it command.
+	(its-translate-region-internal): Make it function.
+
+1998-03-04  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-define-select-keys of its-mode-map): Comment it out.
+	* its-keydef.el (its-make-select-func): Add eval-when to compile this.
+
+	* egg-cnv.el (egg-decide-bunsetsu): Deleted.
+	* its.el (its-restart): Call its-setup-fence-mode with no argument.
+
+	* its.el (its-keyseq-acceptable-p): Bug fix.
+
+1998-03-03  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	*its.el (its-get-keyseq-syl): Compensate when DSYL has back.
+	(its-DSYL-with-back-p): New function. Return t when DSYL has back.
+	(its-concrete-DSYL-p): New function. Return t when DSYL is cons
+	form which means input is not continued after DSYL was created.
+	(its-make-concrete-DSYL): New function.
+	(its-self-insert-char): Make DSYL to ``concrete-DSYL'' if cursor
+	is t which means input is not continued.
+	(its-input): Test input key is whether acceptable or not when
+	its-barf-on-invalid-keyseq is non-nil.
+	(its-input-to-vsyl): Set cursor status, not just returning it.
+	(its-state-machine its-state-machine-keyseq): Make sure to issue
+	``DSYL-with-back'' when syllable is decided by the rule with back.
+	``test mode'' is added.
+	(its-keyseq-acceptable-p): New function.
+	(its-forward-SYL): The args order of put-text-property was wrong.
+	(its-delete-backward-SYL-by-keystroke): New function.
+	(its-delete-backward-within-SYL): ``delete-by-keystroke'' mode
+	did not work when syllable is decided by the rule with back.
+	Deletion limit is extended to outside of SYL (meaning of
+	``within-SYL'' is changed to ``deletion starts within SYL).
+	(its-transpose-chars): Fixed up.
+	(its-in-fence-p): Confuse at openning fence.
+
+1998-02-25  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-put-cursor): Enable its-map change in fence mode.
+
+	* its-keydef.el (its-make-select-func): Same as above.
+
+1998-02-25  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-set-cursor-status): New function.
+	(its-setup-fence-mode): New function.
+	(its-insert-fence-open its-insert-fence-close): Deleted.
+	(its-start, its-restart, its-self-insert-char): Avoid fence
+	destruction on its-barf.
+	(its-input-to-vsyl, its-state-machine, its-state-machine-keyseq,
+	its-buffer-ins/del-SYL, its-ins/del-SYL-batch): Update cursor
+	status on updating syllables.
+	(its-input-error): New function to realize doc-string of
+	its-barf-on-invalid-keyseq.
+
+	* egg.el (egg-mode): Don't use egg-mode-line-title which cause
+	wrong-type-argument at isearch.  Bind its-select-XXX to key only
+	when modefull is select.
+
+	* egg-mlh.el (mlh-hangul, mlh-zhongwen, mlh-zhongwen-tw): Same
+	as above.
+
+	* its-keydef.el (its-make-select-func): Same as above.
+
+	* leim-list-egg.el: Same as above.
+
+1998-02-24  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-state-machine-keyseq): Remove binding
+	its-barf-on-invalid-keyseq to nil.
+	(its-ins/del-SYL-batch): Avoide altering its-XXX-map.
+	(its-translate-region-internal): its-translation-result's data
+	type is changed to string.
+
+	* egg-cnv.el (egg-convert-region): Gather contiguous same
+	language part.
+
+1998-02-21  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-ins/del-SYL-batch): Set its-lang property.
+	(its-translate-region): Remove its-lang property from translated
+	text.
+	(its-translate-region-internal): New function.  Retain its-lang
+	property on translated text.
+
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Force base language
+	to Japanese.
+
+	(mlh-hangul mlh-zhongwen-tw mlh-zhongwen): New functions for
+	conversion functions.
+
+1998-02-20  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-restart): New function.
+	(its-insert-fence-open, its-insert-fence-close): New function.
+	(its-start): Rewritten.  Use its-insert-fence-open and
+	its-insert-fence-close.
+	(its-exit-mode-internal): Leave its-syl property.
+	(its-exit-mode-internal): Delete the property in this case.
+	(its-keydef): Require it.
+
+	* its-keydef.el: Provide the feature.
+
+	* egg-cnv.el (egg-convert-region): Add egg-source property to save 
+	the source string.
+	(egg-conversion-map, \C-c): New keybind.
+	(egg-get-previous-bunsetsu): Bug fix.
+	(egg-decide-before-point): New implementation.
+	(egg-exit-conversion): Use gg-decide-before-point.
+	(egg-abort-conversion): New command.
+
+1998-02-20  NIIBE Yutaka  <gniibe@akebono>
+
+	* Makefile (SRCS), Egg.prj: Remove euc-china.el.
+	* egg-com.el: Include egg-china.el.
+	* egg-china.el: Removed.
+
+1998-02-18  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Egg.prj: Use PRCS.
+
+	* Makefile (SRCS): Rename euc-cn.el to euc-china.el
+	* egg-mlh.el (mlh-space-bar-backward-henkan): Put "Japanese"
+	language property for text.
+
+1998-02-18  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* euc-china.el: Rename from euc-cn.el.  Update.
+
+	* egg.el (egg-mode): Bug fix.  Call get-exit-conversion.
+	* leim-list-egg.el ("japanese-egg-wnn", "japanese-egg-sj3"): 
+	Use new definition (with language argument).
+	* egg/wnn.el (egg-activate-wnn): 
+	* egg/sj3.el (egg-activate-sj3): 
+	
+1998-02-17  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Makefile (SRCS): Add its/pinyin.el, its/hangul.el and
+	its-keydef.el.
+
+	* egg-com.el (ccl-encode-fixed-euc-kr): Fixed the name.
+	
+1998-02-17  KATAYAMA Yoshio <kate@pfu.co.jp>
+	
+	* its-keydef.el: New file.
+	* its/hangul.el, its/pinyin.el: New version.
+
+	* egg/wnnrpc.el (load-library "egg/wnn"): Comment it out.
+	(wnnrpc-get-error-message): Support multiple languages.
+	(wnnrpc-call-with-environment): Chinese support.
+
+	* egg/wnn.el (wnn-support-languages): New const.
+	(<env>): Add <server-type>, <dic-set>, and <rev-flag>.
+	(wnnenv-get-server-type, wnnenv-get-dictionary-set,
+	 wnnenv-get-reverse-flag): New substs.
+	(wnnenv-get-daibunsetsu-info, wnnenv-set-daibunsetsu-info): Changed.
+	(wnn-server): Removed.
+	(wnn-jserver, wnn-cserver, wnn-tserver, wnn-kserver): New custom.
+	(wnn-server-info-list): New const.
+	(wnn-get-server-info): New function.
+	(wnn-server-locale, wnn-server-type, wnn-server-port,
+	 wnn-server-stream-name, wnn-server-buffer-name,
+	 wnn-server-coding-system, wnn-server-hostname): New substs.
+	(wnn-start-conversion): Add new arguments.
+	(wnn-uniq-candidates): Initialize 'n'.
+	(wnn-change-bunsetsu-length): Simplefied.
+	(wnn-change-bunsetsu-length): Call renbunsetsu-conversion,
+	instead.
+	(wnn-fini, wnn-comm-sentinel): back to 971009 version.
+	(wnn-jserver-port): Removed.
+	(wnn-open): Argument change.  Support languages.
+
+	(wnn-dictionary-specification): Removed.
+	(wnn-dictionary-specification-list): New variable.
+	(wnn-get-dic-spec, wnn-dic-spec-dic-set, wnn-dic-spec-reverse,
+	wnn-dic-spec-name, wnn-dic-spec-param, wnn-dic-spec-fuzokugo,
+	 wnn-dic-spec-dic-list): New substs.
+	(wnn-get-environment): Rewrite.
+	(wnn-create-environment): Rewrite.
+
+	(egg-activate-wnn): Support languages.
+
+	* egg/sj3rpc.el (load-library "egg/sj3"): Don't load it.
+
+	* egg/sj3.el (sj3-support-languages): New const.
+	(sj3-start-conversion, sj3-fini): Add lang.
+	(sj3-change-bunsetsu-length): Simplified.
+	(egg-activate-sj3): Support language.
+
+	* its/hira.el (its/hira): Packagefy. (?)
+	(its-hira-map): Add language spec.  Move here the escape keys
+	("Z", "~").
+
+	* leim-list-egg.el ("chinese-gb-egg-wnn-py", "chinese-gb-egg-wnn-zy",
+	 "chinese-cns-egg-wnn-py", "chinese-cns-egg-wnn-zy",
+	 "korean-egg-wnn"): New input methods.
+
+	* its.el (its-current-language): New Local Variables.
+	<map>: Change the structure.  Add <language>.
+	(its-get-language): New substitution.
+	(its-set-indicator): Removed.
+	(its-get-indicator, its-get-start-state): New implementation.
+	(its-reset-start-state): Removed.
+	(its-buffer-ins/del-SYL): Add new properties, its-map and its-lang.
+	(its-exit-mode-internal): Change for its-map and its-lang.
+	(its-in-fence-p): New function.
+
+	("its-keydef.el"): Load it.
+
+	(its-select-map-menu): Removed.
+	(its-select-map-from-menu): Removed.
+	(its-select-hiragana, its-select-katakana, its-select-downcase,
+	its-select-upcase, its-select-zenkaku-downcase,
+	its-select-zenkaku-upcase, its-select-map, its-zenkaku-escape,
+	its-hankaku-escape): Removed.
+
+	(define-its-state-machine): Rewrite.
+	(define-its-compiled-map): New macro.
+	(its-define-state-machine): Removed.
+
+	(its-forward-SYL): Cleanup.
+
+	(its-beginning-of-input-buffer): Fix.
+	(its-end-of-input-buffer): Likewise.
+
+	* egg-com.el (egg-fixed-euc, egg-mb-euc): New Local Variables.
+	(ccl-decode-fixed-euc-kr, ccl-encode-fixed-euc-kr): New CCLs.
+	(fixed-euc-kr): New coding system.
+	(comm-format-mb-string, comm-format-u16-string): Support EUC-KR.
+	(comm-unpack-u16-string, comm-unpack-mb-string): Likewise.
+
+	* egg-cnv.el (egg-get-bunsetsu-info): New function.
+	(egg-conversion-backend-alist, egg-finalize-backend-alist): 
+	New Variables.
+	Make egg-conversion-backend buffer local.
+	(egg-set-current-backend): New function.
+	(egg-initialize-backend): Call egg-set-current-backend.
+	(egg-start-conversion): Add new argument LANGUAGE.
+	(egg-finalize-backend): Finalize for all backend(s).
+	(egg-set-conversion-backend-internal): New Macro.
+	(egg-convert-region): Support multiple languages in the region.
+	(egg-separate-languages, egg-char-to-language, egg-next-part-lang,
+	egg-next-chinese-lang): New functions.
+	(egg-insert-bunsetsu-list): Change the meaning of last argument.
+	(egg-shrink-bunsetsu): Simplified.  Just call egg-enlarge-bunsetsu.
+	(egg-enlarge-bunsetsu): Support shrink.
+
+	(egg-decide-bunsetsu, egg-next-candidate, egg-select-candidate): 
+	Use egg-get-bunsetsu-info.
+
+	(egg-insert-bunsetsu): The property now includes
+	egg-conversion-backend.
+
+	* egg.el: Don't load its/hira and don't set its-current-map.
+
+	* egg.el (egg-default-language, egg-support-languages): New Variables.
+	(egg-last-method-name, egg-mode-line-title): New Local Variables.
+	(egg-set-mode-line-title, egg-check-language): New functions.
+	(egg-set-support-languages): New function.
+	(egg-mode): Final processing: call its-exit-mode, call
+	egg-exit-conversion.
+	Changing the arguments, remember last input method.
+
+	Bug fix. Don't set its-hira-period and its-hira-comma.
+
+1998-02-17  KAWABATA, Taichi
+
+	* menudiag.el (menudiag-mode-map): New binds for new commands.
+	(menudiag-beginning-of-items, menudiag-end-of-items): New commands.
+	(menudiag-make-menu-formatted-string): Bug fix.  Use 
+	menudiag-item-num-to-char.
+	(menudiag-goto-item): Rewrite.  Better user interface.
+	(menudiag-char-to-item-num, menudiag-item-num-to-char): New
+	functions.
+
+1998-02-07  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
+
+	* leim-list-egg.el: Delete autoload setting for `egg-mode'.
+	Delete input method registration for "japanese-egg".
+
+	* egg.el: Comment out setting for Wnn.
+
+	* leim-list-egg.el: Add autoload setting for
+	`egg-activate-{wnn|sj3}'.
+
+	* egg/sj3.el (egg-activate-sj3): Add DOC-string.
+
+	* egg/sj3.el (egg-activate-sj3): New function.
+	Require egg.
+	Load egg/sj3rpc.el.
+
+	* egg/wnn.el (egg-activate-wnn): New function.
+	Require egg.
+	Load egg/wnnrpc.el.
+
+1998-02-07  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
+
+	* leim-list-egg.el (japanese-egg-wnn): New input method.
+	(japanese-egg-sj3): New input method.
+
+1997-11-20  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
+
+	* leim-list-egg.el: Rename `egg-ja' -> `japanese-egg'.
+
+1997-11-20  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
+
+	* egg/wnn.el (wnn): New group.
+	(wnn-server): Use `defcustom'.
+	(wnn-usr-dic-dir): Use `defcustom'.
+
+	* egg.el (egg): New group.
+
+1997-11-20  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
+
+	* menudiag.el (menudiag-mode-map): Swap binding for left and
+	right.
+
+	* egg.el (egg-toroku-region): `wnn-get-environment' requires
+	dictionary-specification.
+
+	* leim-list-egg.el: add autoload setting for egg-mode.
+
+1997-11-03  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* euc-cn.el: New file.  Original name was yincoding.el.
+	Adopted by NIIBE Yutaka  <gniibe@chroot.org>.
+	
+1997-11-03  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-start): Add INVISIBLE property if ITS-FENCE-FACE.
+	* egg-cnv.el (egg-decide-before-point): Ditto.
+	Based on patch by Kenichi HANDA <handa@etl.go.jp>.
+
+	Once, I thought that we need many environments which correspond to
+	outstanding CONVERSION buffre.  However, I've learned that WNN4
+	protocol is completely independent.  It's no use to maintain each
+	environment.  Share the one environment.
+	* egg/wnn.el (wnn-environments): Removed.  
+	(wnn-environment): New variable.
+	(wnn-comm-sentinel): Follow the change.  Let users know the close.
+	(wnn-fini): Likewise.
+
+	<env>: Remove the member <in-use>.
+	(wnnenv-create): Follow the structure change.
+	(wnn-end-conversion): Likewise.
+	(wnnenv-get-in-use-flag, wnnenv-set-in-use-flag): Removed.
+	(wnn-find-env-not-in-use): Removed.
+	(wnn-get-environment): Use wnn-environment instead of wnn-environments.
+	Take one argument.
+
+	* egg-cnv.el (egg-decide-before-point): Signal error on first SYL.
+	Reported by KATAYAMA Yoshio <kate@pfu.co.jp>.  Changes of 1997-09-07
+	was not enough.
+	Set-marker M to NIL after PUT-TEXT-PROPERTY.
+
+	Because the name of identifier begins egg-*, change the file names.
+	* tamago: Rename from tamago.
+	* egg.el, egg-mlh.el, egg-com.el, egg-cnv.el: Rename from tamago-*.el
+	* Makefile: Follow the changes.
+
+1997-10-05  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* tamago/wnn.el (wnn-uniq-candidates): Add new argument BUNSETSU.
+	Call WNN-BUNSETSU-SET-ZENKOUHO-POS, WNN-BUNSETSU-SET-ZENKOUHO in
+	this function.  Handle the case where BUNSETSU is not the first
+	element of BUNSETSU-LIST.
+	(wnn-list-candidates): Use new API of WNN-UNIQ-CANDIDATES.
+
+	* tamago-cnv.el (egg-next-candidate): Handle the case where
+	EGG-LIST-CANDIDATES returns non zero value.
+
+1997-10-04  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Makefile (install): Install to SITEDIR.
+
+1997-09-26  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its/hira.el (its-hira-enable-zenkaku-alphabet): New variable.
+	(its-hira-map): Use it.
+
+1997-09-19  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Arrange for LEIM.  Use tamago/ subdirectory.
+	* tamago/: Rename from tamago-lib.
+
+1997-09-18  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* tamago-cnv.el (egg-select-candidate): menu-select -->
+	menudiag-select. 
+	* tamago.el (egg-toroku-region,	egg-hinshi-select): Likewise.
+
+	* tamago-cnv.el (egg-exit-conversion): Run hook of
+	input-method-after-insert-chunk-hook.
+	* its.el (its-exit-mode-internal): Ditto.
+
+	* tamago-mlh.el (mlh-comma-period-style): Deleted.
+
+	* its/, tamago-lib/: New directory.
+	* its/: Move its-*.el files here.
+	* tamago-lib/: Move sj3.el, sj3rpc.el, wnn.el and wnnrpc.el here.
+
+	* tamago-com.el: Rename from comm.el.
+	* tamago-mlh.el: Rename from mlh.el.
+	* tamago-cnv.el: Rename from convert.el.
+
+	* menudiag.el: Rename from menu.el.
+	(Throughout): Rename menu-* to menudiag-*.
+
+1997-09-07  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg.el (egg-insert-after-hook, egg-exit-hook): Removed.
+	(egg-sai-henkan-start, egg-sai-henkan-end, egg-old-bunsetu-suu):
+	Removed.
+
+	* wnn.el (WNN-const): New macro.
+	(wnn-start-conversion, wnn-open-dictionary, wnn-open-frequency,
+	wnn-set-dictionary-sub, wnn-update-frequency): Use it.
+
+	* wnnrpc.el (wnn-const): New macro.
+	Throughout: Use wnn-const.
+
+	* convert.el (egg-decide-before-point): Bug fix.  Handle the case
+	where all bunsetsu are decided.
+	Reported by KATAYAMA Yoshio <kate@pfu.co.jp>.
+
+	* convert.el (egg-exit-conversion): Call egg-end-conversion at end.
+	(egg-decide-before-point): Ditto.
+
+	* wnn.el (wnn-environments): Change the structure of enviromnents.
+	(wnn-fini): Handle errors.
+	(wnn-open): Set sentinel.  Delete buffer on failure.
+	(wnn-comm-sentinel): New function.
+	(wnn-find-env-not-in-use): Return nil when not found.
+
+	(wnn-create-environment): Take username as argument.
+	(wnn-get-environment): Follow the change.
+
+	(wnnenv-create): Remove useless serial no.
+	(wnnenv-get-in-use-flag, wnnenv-set-in-use-flag): Follow the change.
+	(wnnenv-get-daibunsetsu-info, wnnenv-set-daibunsetsu-info): Likewise.
+	(wnn-create-environment, wnn-get-environment): Likewise.
+
+1997-09-04  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-state-machine-keyseq): Bug fix.  Handle VSYL.
+
+	* sj3.el, sj3rpc.el: New files.
+
+	* comm.el (comm-call-with-proc, comm-call-with-proc-1): New macros.
+	* wnnrpc.el (wnnrpc-call-with-proc, wnnrpc-call-with-proc-1): Deleted.
+	Throughout: Use comm-call-with-proc and comm-call-with-proc-1.
+
+1997-09-03  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-call-with-proc-1): Bug fix.  let --> progn.
+
+	* convert.el (egg-conversion-backend): Initail value is NIL.
+
+	* wnn.el (wnn-conversion-backend): New constant.
+
+	* comm.el (comm-format,comm-unpack): Support multibyte string.
+	(comm-format-mb-string): New substitution.
+	(comm-unpack-mb-string): New substitution.
+
+	* wnn.el (wnn-fini): Handle the case where wnn-environments is nil.
+	Reported by Hisashi Miyashita <himi@bird.scphys.kyoto-u.ac.jp>.
+
+1997-09-03  Hiroshi Ogata <hiroshi@nereid.rim.or.jp>
+
+	* mlh.el (mlh-zenkaku): Use new API of Emacs-20,
+	japanese-zenkaku-region.
+
+1997-09-02  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg.el (egg-toroku-region): New function.
+
+	* wnn.el (wnn-list-dictionaries): New function.
+	(wnnenv-get-proc): New function.
+
+	* wnnrpc.el (wnndic-get-id, wnndic-get-comment, wnndic-get-dictname): 
+	New substitution.
+	(wnnrpc-get-writable-dictionary-id-list): Rename from
+	wnnrpc-get-writable-dictionary-list.
+
+1997-09-01  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-decide-bunsetsu): New function.
+	(egg-decide-before-point): New command.
+	(egg-exit-conversion): Use egg-decide-bunsetsu.
+
+	* its.el (its-start): Divide the fence buffer into two parts and
+	make them intangible, so that point goes appropriate position.
+	(its-put-cursor): The cursor belongs to part-2.
+	(its-buffer-ins/del-SYL): The new SYL belongs to part-1.
+	(its-exit-mode-internal): Remove the property on exit.
+	(its-beginning-of-input-buffer): Make SYLs have property of "part 2".
+	(its-backward-SYL): Likewise.
+	(its-forward-SYL): Make SYLs have property of "part 1".
+	(its-end-of-input-buffer): Likewise.
+
+	(its-input-end): Delete useless argument.
+	(its-beginning-of-input-buffer, its-exit-mode,
+	its-exit-mode-off-input-method, its-kick-convert-region,
+	its-end-of-input-buffer, its-backward-SYL, its-forward-SYL,
+	its-delete-SYL): Follow the change.
+
+1997-08-31  NIIBE Yutaka  <gniibe@chroot.org>
+
+	For egg-mode, don't use minor mode, override local map instead.
+	For its-mode and egg-conversion-mode, don't use minor mode,
+	instead use local-map of text property.
+
+	Although overriding local map is not good, using local-map of
+	property is natural thing.  Besides, point-left/point-entered
+	don't work as I expected (yet).
+
+	* egg.el (egg-mode: variable): Removed.
+	* egg.el (egg-modefull-map, egg-modeless-map): Make them functions.
+	Generate overriding local map.
+	* egg.el (egg-mode): use overriding local map.
+
+	* its.el, convert.el: Undo changes of 1997-08-28 for minor mode
+	and local map of text properties.
+
+	* its.el (its-exit-mode-off-input-method): New function.
+
+1997-08-29  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Let Undo work correctly.
+	* its.el (its-self-insert-char): Delete/Insert cursor.
+
+	* its.el (its-put-cursor): Remove useless first argument.
+	(its-start, its-beginning-of-input-buffer, its-end-of-input-buffer,
+	its-backward-SYL, its-forward-SYL, its-delete-SYL, its-delete-SYL,
+	its-delete-backward-SYL-internal, its-delete-backward-within-SYL): 
+	Follow the change.
+
+1997-08-28  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its-erpin.el: New file.
+	* its-pinyin.el: New file.
+	* its-zhuyin.el: New file.
+
+1997-08-28  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-exit-mode-no-egg): Removed.
+	(its-exit-mode-internal): Remove first argument.
+	(its-kick-convert-region, its-delete-SYL,
+	its-delete-backward-SYL-internal, its-delete-backward-within-SYL):
+	Follow the change.
+
+	Don't use local map of text properties, instead use minor mode.
+	* convert.el (egg-conversion-mode): New minor mode.
+	(egg-conversion-left, egg-conversion-enter): New functions.
+	(egg-insert-bunsetsu): remove local-map, add point-entered and
+	point-left properties.
+	(egg-exit-conversion): Likewise.
+	(egg-exit-conversion): Exit minor mode.
+
+	* its.el (its-put-cursor): remove local-map, add point-entered and
+	point-left properties.
+	(its-enter, its-left): New functions.
+	(its-mode): New variable.  New minor mode.
+
+1997-08-27  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-exit-conversion-no-egg): Removed.
+	(egg-exit-conversion): No argument, no egg-mode.
+
+	* convert.el (egg-convert-region): No egg-flag.
+	* its.el (its-exit-mode-internal): Follow it.
+	* mlh.el (mlh-space-bar-backward-henkan): Ditto.
+
+1997-08-26  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnn.el (wnn-change-bunsetsu-length): Don't use magic #3.
+
+	* convert.el (egg-insert-bunsetsu-list): Add optional argument
+	CONTIN.
+
+1997-08-25  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-insert-bunsetsu): Include seperator.  Add
+	intangible property to bunsetsu.
+	(egg-insert-bunsetsu-list): Follow the change.
+	(egg-backward-bunsetsu, egg-forward-bunsetsu, 
+	egg-select-candidate, egg-next-candidate, 
+	egg-shrink-bunsetsu, egg-enlarge-bunsetsu, 
+	egg-exit-conversion): Ditto.
+
+	* mlh.el (mlh-space-bar-backward-henkan): Call egg-convert-region
+	with last argument t.  Turn of egg-mode.
+
+1997-08-24  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-exit-mode-internal): Inactivate input method.
+
+	* wnn.el (wnn-end-conversion): Change the interface.
+	(wnn-update-frequency): Follow the change.
+	* convert.el (egg-exit-conversion): Follow the change.
+
+	* wnn.el (wnn-start-conversion): Change the return value interface.
+	* convert.el (egg-convert-region): Follow the change.
+
+	* wnn.el (wnnenv-get-bunsetsu-pos, wnnenv-set-bunsetsu-pos): Removed.
+	(wnn-get-bunsetsu-source-afterwards): Removed.
+	(wnn-get-number-of-bunsetsu, wnn-get-bunsetsu-info): Removed.
+	(wnnenv-get-bunsetsu-list, wnnenv-set-bunsetsu-list): Removed.
+	(wnn-start-conversion): Don't call wnnenv-set-bunsetsu-list.
+	(wnn-end-conversion): Ditto.
+
+1997-08-23  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-change-bunsetsu-length): Change the interface.
+	(egg-shrink-bunsetsu,egg-enlarge-bunsetsu): Follow it.
+
+	(egg-source-maxlen-from-here): Removed.
+	(egg-get-previous-bunsetsu): New function.
+	(egg-select-candidate, egg-shrink-bunsetsu, egg-enlarge-bunsetsu,
+	egg-next-candidate): Use egg-get-previous-bunsetsu.
+
+1997-08-20  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg.el (minor-mode-alist): Don't show " EGG" in mode line.
+	(egg-mode): Use input method indicator instead.
+
+1997-07-20  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-next-candidate): Rename from egg-next-conversion.
+	(egg-previous-candidate): Rename from egg-previous-conversion.
+	(egg-select-candidate): Follow the change of new interface.
+	(egg-source-maxlen-from-here): Likewise.
+
+1997-07-19  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnn.el (wnn-start-conversion): Change the interface.  Return ENV
+	and the	list of bunsetsu.  Fix the documentation string too.
+	* convert.el (egg-convert-region): Follow the change.
+	(egg-insert-converted-result): Change the argument.
+	(egg-insert-bunsetsu-list): Rename from egg-insert-converted-result.
+	(egg-insert-bunsetsu): New function.
+	(egg-get-number-of-bunsetsu,egg-get-bunsetsu-info): Removed.
+	(egg-backward-bunsetsu): Don't use bunsetsu-pos.
+
+	* wnn.el (wnn-get-bunsetsu-converted): Change the interface.  Take
+ 	BUNSETSU as the argument instead of ENV and POS.
+	* convert.el (egg-get-bunsetsu-converted): Follow the change.
+
+	* wnn.el (wnn-bunsetsu-create): Take ENV as the first argument.
+	(wnn-list-candidates): Dont take ENV.
+	(wnn-bunsetsu-get-env): New substitution.
+
+	* wnnrpc.el (wnnrpc-receive-sho-bunsetsu-list-sub): Take the argument
+	for ENV, and use it for the argument of wnn-bunsetsu-create.
+	(wnnrpc-receive-sho-bunsetsu-list): Take ENV as the first argument.
+	(wnnrpc-renbunsetsu-conversion): Follow the change.
+
+1997-07-17  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-decide-candidate):  Change the interface.
+	Take the argument bunsetsu-info instead of conversion-engine.
+
+	* wnn.el (wnn-get-candidate): Deleted.
+
+	* convert.el (egg-get-all-candidates): Change the interface.
+	Take an argument bunsetsu-info instead of conversion-engine.
+	(egg-select-candidate): Follow the change.
+
+	* convert.el (egg-set-bunsetsu-pos,egg-get-bunsetsu-pos): Deleted.
+	(egg-list-candidates,egg-get-current-candidate-number): New stub.
+	* wnn.el (wnn-bunsetsu-create): Add new member zenkouho-pos.
+	(wnn-bunsetsu-get-zenkouho-pos,wnn-bunsetsu-set-zenkouho-pos): New
+	functions.
+	(wnn-list-candidates,wnn-get-current-candidate-number): New functions.
+	(wnn-set-bunsetsu-pos,wnn-get-bunsetsu-pos): Deleted.
+
+	* convert.el (egg-get-number-of-candidates): Change the interface.
+	Take an argument bunsetsu-info instead of conversion-engine.
+	(egg-next-conversion,egg-select-candidate): Follow the change.
+	* wnn.el (wnn-get-number-of-candidates): Follow the change.
+
+	* wnn.el (wnn-get-bunsetsu-source-afterwards): New function.
+	(wnn-change-bunsetsu-length): Use it.
+
+	* convert.el (egg-get-bunsetsu-source): Change the interface.
+  	Take an argument bunsetsu-info instead of conversion-engine.
+	(egg-enlarge-bunsetsu,egg-shrink-bunsetsu,egg-source-maxlen-from-here):
+ 	Follow the change.
+	* wnn.el (wnn-get-bunsetsu-source): Follow the change.
+
+	Put bunsetsu information on text property.
+	* wnn.el (wnn-get-bunsetsu-info): New function.
+
+	* convert.el (egg-insert-converted-result): Put it on text property.
+	(egg-conversion-backend): Add new interface
+ 	wnn-get-bunsetsu-info.
+	(egg-get-bunsetsu-info): New stub.
+
+1997-07-17  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its.el (its-state-machine-keyseq, its-state-machine): Handle
+	end-of-input correctly when going backward.
+
+1997-07-16  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnn.el (wnn-create-directory): Bug fix.  Really make directory.
+
+1997-07-15  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its-hangul.el (its-define-hangul): Use its-defrule-otherwise.
+
+1997-07-15  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its-hangul.el: Updated.
+
+1997-06-19  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its-hira.el: its-hira-hankaku-escape --> its-hankaku-escape.
+	its-hira-zenkaku-escape --> its-zenkaku-escape.
+
+1997-06-14  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el: Change the data structure of <expr-output-back-list> so
+ 	that it can encourage sharing same structure and it can use same
+ 	structure of SYL.
+	(its-ins/del-SYL-batch): Follow the change of data structure.
+	(its-define-otherwise): Change the argument.
+	(its-defrule-otherwise): New function.
+	(its-eob-keyexpr, its-eob-back, its-make-class+back,
+ 	its-make-otherwise): New substitutions.
+
+1997-06-13  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its-kana.el: New file.  Taken from its/kanainput.el of Mule-2.3.
+
+	* its-hira.el: Use `define-its-state-machine'.
+
+	* its.el (its-zenkaku-escape, its-hankaku-escape): Make them
+ 	defconst.
+	(define-its-state-machine, define-its-state-machine-append): New
+ 	macro.
+
+1997-06-13  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its-hira.el ("n'"): Added.
+
+1997-06-12  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	its-zenkaku-escape and its-hankaku-escape are also used in hangul.
+	* its.el (its-zenkaku-escape, its-hankaku-escape): Moved to here
+	and rename them.
+	* its-hira.el (its-hira-hankaku-escape, its-hira-zenkaku-escape): 
+	Removed.
+
+	* its.el (its-read-current-its-string): Removed.  There's the
+ 	function `read-multilingual-string' already.
+
+1997-06-12  KATAYAMA Yoshio <kate@pfu.co.jp>
+
+	* its-hangul.el: New file.
+
+1997-06-10  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Miscellaneous cosmetic changes.
+	* comm.el: New file.  Move communication related funcitons from
+ 	wnnrpc.el.
+	(comm-format-u32c, and others): Rename from wnnrpc-*.
+	* wnnrpc.el (Throughout): Follow the rename.
+
+	* wnn.el (wnnenv-get-in-use-flag): Rename from wnn-e-get-in-use.
+	(wnnenv-set-in-use-flag): Rename from wnn-e-set-in-use.
+	(Others): Rename from wnn-e-*.
+	(wnn-bunsetsu-*): Rename from wnnrpc-b-*, and moved from wnnrpc.el.
+
+	* convert.el (egg-exit-conversion): Call egg-do-auto-fill.
+
+	* its.el (its-translate-region): Bug fix.  End of input.
+	(its-state-machine): Bug fix.  Generate error if
+ 	its-barf-on-invalid-keyseq.
+	(its-exit-mode-internal): Call egg-do-auto-fill.
+
+	* wnnrpc.el (ccl-decode-fixed-euc-jp): Bug fix for ASCII.
+
+	* mlh.el (mlh-space-bar-backward-henkan): Call egg-do-auto-fill.
+
+	* egg.el: Comment out definition of C-\ in global-map.
+
+1997-06-09  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-kick-convert-region): Rename from its-convert-region.
+	(its-mode-map): Follow the change.
+
+	(its-make-next-state): Use list instead of cons.
+
+	(its-get-kst/t): Make it substitution.
+	(its-set-kst, its-get-keyseq, its-set-keyseq, its-kst-p, 
+	its-get-output, its-set-output, its-get-keyseq-syl): Likewise.
+	(its-new-state, its-new-map, its-get-indicator, its-set-indicator,  
+	its-get-start-state, its-reset-start-state): Likewise.
+
+	(its-get-next-state): Use assq instead of assoc.
+
+	(its-goto-state): Tune up.
+
+1997-06-08  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* mlh.el: Merge mlh-nihongo.el.
+	* mlh-nihongo.el: Removed.
+
+	* its-hira.el: Moved from its/hira.el.  Move comments to HISTORY.
+	(its-hira-enable-double-n, its-hira-period, its-hira-comma,
+ 	its-hira-open-bracket, its-hira-close-bracket,
+ 	its-hira-horizontal): New variables.
+	Use the variables to define the state-machine.
+
+	Implement non-interactive translation in ITS.
+	* its.el (its-translate-region): New function.
+	(its-latest-SYL): New Variable.
+	(its-state-machine-keyseq): Use it.
+	(its-update-latest-SYL): New function.
+	(its-buffer-ins/del-SYL): Use it.
+	(its-translation-result): New variable.
+	(its-ins/del-SYL-batch): New function.
+	(its-enable-double-n-syntax, its-use-kuten-for-period,
+ 	its-use-touten-for-comma, its-zenkaku-escape, its-hankaku-escape):
+ 	Removed.
+
+	Use ITS, delete mlh's own implementation of automata.
+	* mlh.el (mlh-start-state, mlh-set-of-chars, mlh-start-state-sym,
+	mlh-set-of-chars-sym, mlh-define-automata, mlh-end-of-definition,
+	mlh-defrule, mlh-next-state, mlh-roma-kana-backward): Removed.
+	(mlh-cause-error-when-unknown-romaji-sequence): Removed.
+	(mlh-atoi): Removed.
+	(mlh-white-space, mlh-zenkaku-white): Use string-to-int.
+	* mlh-nihongo.el (mlh-hira-start-state, mlh-hira-chars, and all
+ 	rules of definition which defines the automaton): Removed.
+	(mlh-kanji-with-henkan-region-function): Use its-translate-region.
+	(mlh-hiragana, mlh-katakana): Likewise.
+
+	Fix of CCL.
+	* wnnrpc.el (ccl-decode-fixed-euc-jp): Bug fix for jisx0212.
+	Add missing parens.
+
+	Speed up of unpacking.
+	* wnnrpc.el (wnnrpc-following-char-or-wait): Tune up.
+	(wnnrpc-following+forward-char): New function.
+	(wnnrpc-unpack-u32c, wnnrpc-unpack-u32, wnnrpc-unpack-u16,
+ 	wnnrpc-unpack-u8): Use it.
+	(wnnrpc-accept-process-output): New function.
+	(wnnrpc-unpack-u16-string, wnnrpc-unpack-u8-string,
+ 	wnnrpc-unpack-bytes): Use it.  Use search-forward.
+	(wnnrpc-unpack-u16-string): Use decode-coding-region.
+
+1997-06-07  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnn.el (wnn-get-all-candidates): New function.
+	(wnn-set-bunsetsu-pos): Return 0 (instead of -1).
+
+	* convert.el (egg-get-candidate): Removed.
+	(egg-get-all-candidates): New entry function.
+	(egg-conversion-backend): Entry for egg-get-all-candidates.
+	(egg-select-candidate): New function.
+	(egg-conversion-map): Bind "\M-s" and egg-select-candidate.
+
+1997-06-05  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* bushu.el: Renamed from busyu.el.
+	(bushu-break-string, etc): Renamed from busyu*.
+
+	* menu.el: Completely rewritten.
+
+1997-06-03  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its.el (its-reset-start-state): Bug fix.  Delete a CDR.
+
+	Implement "class of key" transition.
+	Change the structure of <state>, the last member is
+	<key-state-table/terminal> instead of <key-state-alist/terminal>.
+	* its.el (its-kst-p): Rename from its-ksa-p.
+	(its-get-next-state): Follow the change of the data structure.
+	(its-state-machine): Likewise.
+	(its-make-next-state): Likewise.
+	(its-set-kst): New function.
+	(its-get-otherwise): New function.
+	(its-otherwise-match): New function.
+	(its-define-otherwise-terminate-here): Removed.
+	(its-define-otherwise): New function.
+	(its-defrule*): Use its-define-otherwise.
+
+	* its/hira.el (n): Use its-define-otherwise.
+
+1997-06-02  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-receive-sho-bunsetsu-list-sub,
+ 	wnnrpc-receive-sho-bunsetsu-list-sub-2): Splited from
+	wnnrpc-receive-sho-bunsetsu-list.
+	(wnnrpc-receive-dai-bunsetsu-list): New function.
+	(wnnrpc-daibunsetsu-conversion, wnnrpc-get-daibunsetsu-candidate): 
+	New function.
+
+1997-06-01  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (ccl-decode-fixed-euc-jp): Clean it up.
+	(wnnrpc-file-attribute): Rename from wnnrpc-stat-file.
+	(wnnrpc-get-dictionary-list-with-environment): Rename from
+	wnnrpc-get-dictionary-list-with-environment.
+
+	Implement RPC more.
+	* wnnrpc.el (wnnrpc-who, wnnrpc-get-env-list, wnnrpc-kill,
+ 	wnnrpc-delete-dictionary, wnnrpc-set-flag-on-dictionary,
+ 	wnnrpc-get-dictionary-list, wnnrpc-delete-word,
+ 	wnnrpc-receive-word, wnnrpc-search-word,
+ 	wnnrpc-search-word-in-dictionary, wnnrpc-get-word-info,
+ 	wnnrpc-set-comment-on-word, wnnrpc-get-dictionary-info,
+ 	wnnrpc-set-file-comment, wnnrpc-hinshi-name,
+ 	wnnrpc-set-file-password, wnnrpc-set-hinshi-table): New functions.
+
+1997-05-31  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-format-u32c, wnnrpc-unpack-u32c): New
+ 	substitutions.  Support 32-bit number represented in cons cell of
+ 	a pair of 16-bit integer.
+	(wnnrpc-format, wnnrpc-unpack): Handle u32c (U).
+
+	(wnnrpc-format-bytes, wnnrpc-unpack-bytes): New substitutions.
+  	Support byte stream end with 255(-1).
+	(wnnrpc-format, wnnrpc-unpack):  Handle bytes (B).
+
+	(wnnrpc-local-file-loaded): New function.
+	(wnnrpc-call-with-proc-1): New macro.  Assume the buffer is the one
+	of process.
+
+1997-05-29  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-get-conversion-parameters, wnnrpc-file-loaded,
+ 	wnnrpc-write-file, wnnrpc-get-fuzokugo-file, wnnrpc-get-file-list,
+ 	wnnrpc-get-file-list-with-env, wnnrpc-stat-file,
+ 	wnnrpc-get-file-info): New functions.
+	wnnrpc-receive-file-list): New subst.
+
+1997-05-29  Kenichi Handa  <handa@etl.go.jp>
+
+	* wnnrpc.el (ccl-decode-fixed-euc-jp): Tune it up.
+
+1997-05-29  Hisashi Miyashita  <himi@bird.scphys.kyoto-u.ac.jp>
+
+	* wnnrpc.el (fixed-euc-jp, ccl-decode-fixed-euc-jp,
+	ccl-encode-fixed-euc): New private coding system.  Encode/decode
+	CCL for it.
+
+1997-05-27  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-tanbunsetsu-conversion): Change the argument.
+	(wnnrpc-get-bunsetsu-candidates): Likewise.
+	(wnnrpc-renbunsetsu-conversion): Likewise.
+
+	* wnn.el (wnn-change-bunsetsu-length): Follow the change.
+	(wnn-set-bunsetsu-pos): Likewise.
+	(wnn-change-bunsetsu-length, wnn-start-conversion): Likewise.
+
+1997-05-25  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-add-word, wnnrpc-get-dictionary-list,
+	wnnrpc-receive-dictionary-list, wnnrpc-get-writable-dictionary-list,
+	wnnrpc-get-hinshi-list, wnnrpc-hinshi-number): New functions.
+	(wnnrpc-unpack-u16-string): Bug fix for the case of ASCII string.
+
+	* wnn.el (wnn-dictionary-specification): Add dictionaries of
+	gerodic and ones of WNN consortium.
+
+	Implement a false path.
+	* wnnrpc.el (wnnrpc-renbunsetsu-conversion): Generate an error on
+ 	failure.
+	(wnnrpc-get-bunsetsu-candidates): Ditto.
+	(wnnrpc-tanbunsetsu-conversion): Ditto.
+
+	Implement a false path.  Error recovery.
+	* wnn.el (wnn-create-directory, wnn-open-dictionary,
+ 	wnn-open-frequency, wnn-query-del/create-frequency): New function.
+	(wnn-set-dictionary-sub): New function.
+
+1997-05-24  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-version, wnnrpc-access, wnnrpc-mkdir,
+ 	wnnrpc-create-dictionary, wnnrpc-create-frequency, 
+	wnnrpc-discard-file, wnnrpc-remove-file): New functions.
+	(wnnrpc-test-result-and-get-error): New subst.
+
+	Implement a false path from wnnrpc-set-fuzokugo-file.
+	* wnnrpc.el (wnnrpc-set-fuzokugo-file): Return negate-encoded
+ 	error code on failure.
+	* wnn.el (wnn-create-environment): Generate an error message.
+
+	Implement a false path from wnnrpc-open-file.
+	* wnnrpc.el (wnnrpc-open-file): Change the interface.  Return
+	negate-encoded error code on failure.
+	* wnn.el (wnn-open-file): New function.
+	(wnn-create-environment): Handle return value, and generate
+	an error message for wnnrpc-set-fuzokugo-file on failure.
+	(wnn-set-dictionary): Handle return value.
+
+1997-05-17  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-error-message): Error strings taken from
+ 	Wnn-4.2 distribution.
+	(wnnrpc-errono): Removed.
+
+	Implement a false path from wnnrpc-open.
+	* wnnrpc.el (wnnrpc-open): Change the interface.  Return NIL on
+ 	success, error code on failure.
+	* wnn.el (wnn-open): Delete process and buffer.
+	Generate an error on failure.
+	(wnn-get-environment): Follow the change (none).
+	(wnn-start-conversion): Follow the change (none).
+	* convert.el (egg-convert-region): Follow the change.  Call
+ 	delete-region after egg-start-conversion.
+
+	Implement a false path from wnnrpc-connect.
+	* wnnrpc.el (wnnrpc-connect): Change the interface.  Return
+ 	negate-encoded error code on failure.
+	* wnn.el (wnn-create-environment): Generate an error on failure.
+	(wnn-get-environment): Follow the change.  On failure, don't
+	register the environment to wnn-environments.
+
+1997-05-16  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	Dynamically allocate environment arbitrarily.
+	* wnn.el (wnn-create-environment): Change the structure of ENV.
+	(wnn-e-get-in-use, wnn-e-set-in-use): New subst.
+	(wnn-end-conversion): Call wnn-e-set-in-use.
+	(wnn-get-environment, wnn-find-env-not-in-use): New function.
+	(wnn-start-conversion): Call wnn-get-environment.
+
+	* wnn.el (wnn-fini): Implemented.
+
+1997-05-15  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-start-conversion): Change the interface.
+	(egg-convert-region): Follow the change.
+	(egg-open-if-not): Removed.
+	* wnn.el (wnn-start-conversion): Follow the change.
+
+	* wnn.el (wnn-environment-list): Removed.
+	(wnn-environment-serial): Removed.
+	(wnn-connect-and-init): Removed.
+	(wnn-environments): New variable which holds all environments.
+
+1997-05-15  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* wnn.el (wnn-change-bunsetsu-length): Bug fix.  Last argument to
+ 	wnnrpc-b-set-freq-down is list of bunsetsu.
+
+	* mlh.el (mlh-do-spacing): Emacs 20 related changes.  
+	Use category-set-mnemonics, and char-category-set.
+	According to suggestion by Kenichi Handa <handa@etl.go.jp>.
+
+1997-05-15  MORIOKA Tomohiko <morioka@jaist.ac.jp>
+
+	* wnn.el (wnn-usr-dic-dir): New variable.
+	(wnn-filename): Use wnn-usr-dic-dir.
+
+	* its.el (its-defrule): New argument `enable-overwrite'.
+
+1997-05-14  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-exit-conversion-unread-char): Use newer variable
+ 	unread-command-events, as unread-command-char is obsolete.
+	(egg-shrink-bunsetsu, egg-source-maxlen-from-here,
+ 	egg-enlarge-bunsetsu, egg-next-conversion, egg-exit-conversion,
+ 	egg-exit-conversion, egg-insert-converted-result): New property
+ 	EGG-CONVERSION-ENGINE, which specifis backend.
+
+	(egg-start-conversion, egg-get-number-of-bunsetsu,
+ 	egg-get-bunsetsu-converted, egg-set-bunsetsu-pos,
+ 	egg-get-bunsetsu-pos, egg-get-number-of-candidates,
+ 	egg-get-candidate, egg-decide-candidate,
+ 	egg-change-bunsetsu-length, egg-get-bunsetsu-source,
+ 	egg-end-conversion): Change the interface, new argument c.
+	* wnn.el (wnn-start-conversion, wnn-get-number-of-bunsetsu,
+	wnn-get-bunsetsu-converted, wnn-set-bunsetsu-pos, 
+	wnn-get-bunsetsu-pos, wnn-get-number-of-candidates, 
+	wnn-get-candidate, wnn-decide-candidate, 
+	wnn-change-bunsetsu-length, wnn-get-bunsetsu-source, 
+	wnn-end-conversion): Likewise.
+
+	* convert.el (egg-open-if-not): Change the interface.  Return
+ 	conversion backend.
+
+	* wnnrpc.el (wnnrpc-following-char-or-wait, wnnrpc-unpack-u32,
+ 	wnnrpc-unpack-u16, wnnrpc-unpack-u8, wnnrpc-unpack-u16-string,
+ 	wnnrpc-unpack-u8-string): Change the interface to avoid
+ 	compilation warnings.
+	(wnnrpc-unpack): Use new interface.
+
+	* wnn.el (wnn-open): Change the name of WNN buffer as debug has
+ 	been done.
+
+1997-05-11  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el (wnnrpc-following-char-or-wait): Rename from
+ 	wnn-following-char-or-wait.
+	(wnnrpc-following-char-or-wait): Declare with DEFUN instead of
+ 	DEFSUBST.
+
+1997-05-10  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* Throughout: Use JUNET coding system for file format.
+
+	* mlh.el: Move some comments to HISTORY.
+	(mlh-version): Removed.
+	Remove all autoload entries.
+	(henkan-region-function): Removed.
+	(member): Don't need any more.
+
+	* mlh-nihongo.el: Renamed from nihongo.el.
+
+	* mlh.el (mlh-space-bar-backward-henkan): call egg-convert-region
+ 	directly.
+	(mlh-space-bar-backward-henkan): Fix for Emacs 20.
+	Don't call egg:do-auto-fill.
+	(mlh-backward-henkan): Use set-marker-insertion-type.
+	(mlh-do-spacing): Char-category.
+
+	* mlh.el, nihongo.el: Taken from mlh-1.002 distribution.
+
+1997-05-07  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-update-frequency): Removed.
+	(egg-conversion-backend): Remove entry for update-frequency.
+
+	* wnn.el (wnn-dictionary-specification): Change parameters
+	according to suggestion by Tomoko Yoshida in mule-jp@etl.go.jp.
+	Original had been taken from wnn-4.2.
+
+1997-05-06  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-next-conversion): Bug fix.  It's max+ instead of n.
+
+1997-05-05  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnfns.c (Fwnn_get_bunsetsu_converted): Rename from
+	get-converted-bunsetsu.
+	(Fwnn_get_bunsetsu_source): Ditto.
+	* convert.el (egg-get-bunsetsu-converted): Ditto.
+	(egg-get-bunsetsu-source): Ditto.
+
+	* wnn.el (wnn-create-environment): New file which mimics API of
+	wnnfns.c.
+
+1997-04-29  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnrpc.el: New file which implements Remote Procedure Calls of WNN.
+
+1997-04-16  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its/kanainput.el (normal-pair): Use its-defrule*.
+
+	* its.el (its-defrule*): Rewritten.
+
+	* its/hira.el ("n"): Alternative implementation using 'otherwise'.
+
+	* its.el (its-processing-map): Removed.
+	(its-register-map): Rename from its-set-map.
+	(its-register-map): Remove first argumet NAME.
+	(its-defrule): Remove last optional argument END.
+	(its-define-otherwise-terminate-here): New function.
+	(its-goto-state): New function.
+	(its-defrule, its-defoutput): Use its-goto-state.
+
+1997-04-12  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el: Enhance meaning of ITS state machine.  Now, <key>
+ 	includes representation of "ANY of key stroke" (-2).
+	(its-defrule): New feature end=='otherwise.
+	(its-defrule*): New function.
+	(its-state-machine): Implement otherwise-terminate-before-this-key.
+
+	* its/kanainput.el (its-k-zenkaku-escape, its-k-hankaku-escape,
+ 	its-k-symbols-escape): Add prefix its-.  Let them defconst.
+	"W": Move the definition beginning to avoid error.
+
+1997-03-26  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* convert.el (egg-next-conversion): -1 goes to end of bunsetsu.
+
+1997-03-25  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg.el (egg-mode-on, egg-input-mode, egg-in-fence-mode): Deleted.
+	(egg-fence-face-on, egg-fence-face-off): Deleted.
+	(egg-region-start, egg-region-end): Deleted.
+
+1997-03-24  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its/hira.el ("n"): Add "z" and "?" for prefetch char of "n".
+
+	Implement conversion mode.
+	* convert.el: New file.
+
+1997-03-23  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-mode-map): As "\C-g" is used in global-map, use
+ 	"\C-]" instead (for its-cancel-input).
+
+1997-03-22  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Introduce new scheme to specify server.
+	* wnnfns.c (Qjserver, Qcserver, Qtserver, Qkserver): Removed.
+	(Vwnn_server_type): Integer variable.
+	(wnn_get_server_type): Renamed from wnn_check_server_type.
+	(charset_wnn_server_type): Renamed from lc_wnn_server_type.
+
+	Introduce new scheme to specify uniqueness.
+	* wnnfns.c (Qwnn_no_uniq, Qwnn_uniq, Qwnn_uniq_kanji): Removed.
+	(Vwnn_uniqueness_specifier): Integer variable.  Renamed from
+	wnn_uniq_level.
+
+1997-03-21  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Cosmetic changes.
+	* wnnfnc.c (Throughout): Change Lisp function name to follow the
+ 	format of wnn-VERB-OBJECT.
+	Use XFASTINT instead of XINT, if appropriate.
+	
+	* wnnfns.c (Fwnn_fuzokugo_set): Merged with wnn-set-fuzokugo of
+ 	wnn-egg.el.
+
+	* wnn-egg.el (wnn-set-fuzokugo): Deleted.
+
+	* wnnfns.c (Fwnn_dict_add): Merged with wnn-add-dict of wnn-egg.el.
+	* wnn-egg.el (wnn-add-dict): Deleted.
+
+	* wnn-egg-msg.el (wnn-msg-get): Renamed from egg-msg-get.
+	(wnn-message-alist): Renamed from egg-message-alist.
+	Use defconst.
+
+	* wnnfns.c (wnn_check_server_type): Renemed from
+ 	check_wnn_server_type.
+
+	* wnn-egg-msg.el (egg-error): Deleted.  Not useful enough.
+	* wnn-egg.el (Throughout): Replace egg-error by error.
+
+	* egg.el (egg-sai-henkan-start, egg-sai-henkan-end,
+ 	egg-old-bunsetu-suu): Moved from wnn-egg.el.
+
+	* wnn-egg.el (Throughout): Change variable name and function name.
+	Added wnn- prefix, egg- prefix.
+	* wnn-egg.el: Delete historical defaliases.  Only support 
+	wnn-set-[cjk]server-hostname.
+
+	* wnn6.el: New file.  Discriminate Wnn6 related functions.
+	* eggrc-wnn6: New file.  Discriminate Wnn6 related setting.
+
+	* egg-fence.el: Removed.
+
+1997-03-20  NIIBE Yutaka  <gniibe@chroot.org>
+
+	Distingush continuation of egg-mode and turn off of egg-mode.
+	* its.el (its-mode-map): Bind "\C-\\" to its-exit-mode-no-egg.
+	(its-exit-mode-internal): New argument egg-mode-flag.
+	(its-exit-mode-no-egg): New Function.
+
+	Rethink about keymap.  Once, the intention of egg-mode-map has
+ 	been to override ALL of the keymap.  That's so selfish, and not
+ 	friendly to other parts of Emacs.  This implementation intend to
+	be more friendly with other keymaps.
+	* its.el (its-mode-map): Remove definition of "\C-c" for
+ 	its-cancel-input, as C-c has special meaning in Emacs.  We should
+ 	not re-define it.  
+	Remove definition of "\C-q" for its-select-previous-map.  
+	Remove definition of "\C-_" for egg-jis-code-input.  
+	Remove definition of "\C-w", "\C-@", [?\C-\ ] for
+ 	egg-henkan-fence-region.
+
+	Implement START/CURSOR/END scheme.
+	* its.el (its-input-to-vsyl): New function.
+	(its-beginning-of-input-buffer): New function.
+	(its-end-of-input-buffer): New function.
+	(its-backward-SYL): New function.
+	(its-forward-SYL): New function.
+	(its-delete-SYL): New function.
+	(its-delete-backward-SYL): New function.
+	(its-delete-backward-SYL-internal): New function.
+	(its-delete-backward-within-SYL): New function.
+	(its-delete-by-keystroke): New Variable.
+	(its-exit-mode): New function.
+	(its-exit-mode-internal): New function.
+
+	* its.el (its-standard-map-list, its-find, its-next-map,
+ 	its-previous-map): Deleted.
+	(its-get-indicator): Delete duplicated definition.  Leave one which
+	takes <map> argument.
+	(its-input): Rename from its-input-subsubsub.
+
+	* egg.el (egg-mode-map): Don't include SPACE.
+
+	Introduce CURSOR.
+	* its.el (its-state-machine): Add new argument EMIT.  Return CURSOR.
+	(its-state-machine-keyseq): Likewise.
+	(its-input-subsubsub): Return CURSOR.
+	(its-input-subsub): Deleted.
+	(its-DSYL-p): Deleted.
+	(its-buffer-insert-SYL-list): Deleted.
+	(its-buffer-ins/del-SYL): New function.
+	(its-input-end): Change the argument to P of point, and return VOID.
+
+	Change structure of <map>.  <start-state> is normal <state>.
+	(its-new-map): Follow the change of structure.
+	(its-get-indicator, its-set-indicator, its-reset-start-state): 
+	Likewise.
+	(its-reset-start-state): Renamed from its-reset-start.
+
+	Don't use <input-buffer>, but introduce new scheme of SYL property.
+	(its-change-t-to-nil, its-nil-index, its-bytes-between,
+ 	its-delete-between, its-move-nil--->, its-move-nil-<--,
+ 	its-move-nil-<--sub, its-move-nil-to-last, its-move-nil-to-first):
+	Deleted.
+
+1997-03-19  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el: Change the structure of DSYL.  Same as <state>.
+	(its-input-subsub): Follow the change of structure.
+	(its-make-DSYL): Deleted.
+	(its-get-keyseq-cooked): New function.
+
+	Swap the meaning of T/NIL of <SYL>.
+
+	Delete the structure of <input-buffer>.
+	(its-new-input-buffer): Deleted.
+	(its-input-subsub): Remove the argument SYLP.
+	(its-input, its-input-sub, its-init-text-properties): Deleted.
+
+	Introduce START, END and CURSOR.
+
+1997-03-19  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	Global-map should be used, for key sequence not defined by
+ 	its-mode-map and/or egg-mode-map.   Don't mask other maps.
+	* its.el (its-mode-esc-map): Deleted.
+	(its-mode-map): Include define-key of the esc-map here.
+	* egg.el (egg-mode-esc-map): Deleted.
+	(egg-mode-map): Include define-key of the esc-map here.
+	
+1997-03-18  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-input): Rename from its-input-input-buffer.
+	(its-state-machine): Handle END of input (key == -1).
+
+	ITS minor mode deleted.  It's implemented by local-map of text
+ 	properties.
+	(its-mode): Remove the variable.
+	(its-mode): Remove the function.
+
+	* its.el (<input-buffer>): Change the order of <SYL> list.  
+	(car sylp) is last entry of the list.
+	(its-input-buffer): Deleted.  It's now a member of text
+ 	properties.
+	(<map>): Change the structure.  Start state should have "" for keyseq.
+	(its-get-start-state): Follow chage of the <map> structure.
+	(its-reset-start, its-set-indicator, its-get-indicator): Likewise.
+	(its-new-state, its-new-map): Split from its-new-state/map.
+	(its-make-map): Deleted.
+
+1997-03-17  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-buffer-insert-SYL-list): Use insert-and-inherit to
+ 	inherit properties.
+	(its-fence-overlay): Removed. Don't use overlay, as it has no
+ 	information in undo-list.
+
+1997-03-16  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its/hira.el ("n"): Use new feature END.
+	("ppy", "bby", "ddy", "jjy", "zzy", "ggy", "lly", "rry", "hhy",
+ 	"cch", "tts", "tty", "ssh", "ssy", "kky"): its-defoutput.
+
+	* its.el (its-defrule): Add argument END.
+	(its-buffer-delete-SYL): Bug fix. Use length instead of string-width.
+
+1997-03-15  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-input-input-buffer): Implement the case of DSYL.
+
+1997-03-14  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-buffer-delete-SYL): Handle the case of NIL.
+
+	* its/hira.el: Implement "kka" and others.  Implemlement "N".
+	(digit-characters, symbol-characters, downcase-alphabets,
+ 	upcase-alphabets): Delete useless defvar-s.  
+
+1997-03-14  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its/hira.el ("roma-kana"): Follow change of implementation of
+	state machine.
+
+	Correct the abuse of the word "MODE".  It seems that it's direct
+ 	influence of "mode" in Emacs, but it's not mode at all.
+	* its.el (its-map-alist): Renamed from its-mode-alist.
+	(its-get-map): Renamed from its-get-mode-map.
+	(its-set-map): Renamed from its-set-mode-map.
+	(its-define-state-machine): Renamed from its-define-mode.
+	(its-select-map-menu): Renamed from its-select-mode-menu.
+	(its-select-map-from-menu): Renamed from its-select-mode-from-menu.
+	(its-standard-map-list): Renamed from its-standard-modes.
+	(its-next-map): Renamed from its-next-mode.
+	(its-previous-map): Renamed from its-previous-mode.
+	(its-select-map): Renamed from its-select-mode.
+	(its-get-indicator): Renamed from its-get-mode-indicator.
+
+	(its-select-map-from-menu): As it's not mode, don't need offer hooks.
+	(its-next-map): Likewise.
+	(its-previous-map): Likewise.
+	(its-select-map): Likewise.
+
+	Change the implementation of its-mode-alist.  Name is in <map> now.
+	* its.el (its-get-mode-map): Just do assoc.
+	(its-set-mode-map): Simplified.
+
+	* its.el (its-get-indicator): Renamed from its-map-indicator.
+	(its-set-indicator): Renamed from its-map-set-indicator.
+	(its-get-start-state): Renamed from its-map-start.
+	(its-new-state): Change the argunents.
+	(its-map-set-start): Removed.
+	(its-reset-start): New function.
+
+	Remove old implemantation of translator.
+	* its.el (its-resize, its-maps, its-actions, its-inputs,
+ 	its-level, its-maxlevel, its-char-from-buff, its-interactive):
+ 	Removed.
+	(its-make-action, its-reset-maps, its-current-map,
+ 	its-previous-map, its-level, its-enter-newlevel, its-reset-input,
+ 	its-flush-input-before-point, its-peek-char, its-read-char):
+ 	Removed.
+	(its-push-char, its-ordinal-charp, its-delete-charp): Removed.
+	(its-translate-region): Removed.
+	(its-buff-s, its-buff-e): Removed.
+	(its-state-terminalp): Removed.
+
+	Remove selection of candidates in map, it's questionable to
+ 	implement this feature with SYL.  Might rethink in future.
+	(its-make-menu-from-map-result, its-make-alist-from-map-result):
+ 	Removed.
+	(its-make-menu-from-map, its-make-menu-from-map*): Removed.
+	(its-make-alist-from-map, its-make-alist-from-map*): Removed.
+	(its-completing-read): Removed.
+	(its-minibuffer-local-must-match-map,
+ 	its-minibuffer-local-completion-map): Removed.
+	(its-minibuffer-completion-help, car-string-lessp,
+ 	its-temp-echo-area-contents): Removed.
+
+	Implement SYL-based state machine.
+	* its.el (its-input-buffer, its-barf-on-invalid-keyseq): New variables.
+	(its-new-input-buffer): New function.
+	(its-self-insert-char): New command.
+	(its-initial-ISYL, its-make-DSYL, its-make-VSYL,
+ 	its-input-input-buffer, its-input-input-buffer-sub,
+ 	its-state-machine, its-state-machine-keyseq, 
+	its-buffer-delete-SYL, its-buffer-insert-SYL-list,
+ 	its-get-next-state, its-get-ksa/b, its-get-keyseq, its-ksa-p,
+	its-get-output): New function.
+	(its-get-KAS): Removed.
+	(its-get-state, its-get-action, its-set-action): Removed.
+	(its-make-KAS, its-get-KAS): Removed.
+
+	* its.el (its-defrule-sub): Merged into its-defrule.
+
+1997-03-13  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its.el: (its-define-mode): Change the arguments.
+	* its/zhuyin.el ("zhuyin"): Follow the changes of its-define-mode.
+	* its/zenkaku.el ("zenkaku-downcase"): Likewise.
+	* its/pinyin.el ("PinYin"): Likewise.
+	* its/kata.el ("roma-kata"): Likewise.
+	* its/kanainput.el ("kanainput"): Likewise.
+	* its/hira.el ("roma-kana"): Likewise.
+	* its/hankaku.el ("downcase"): Likewise.
+	* its/hangul.el ("hangul"): Likewise.
+	* its/han-kata.el ("roma-han-kata"): Likewise.
+
+	* its.el (its-action-output, its-action-next, its-get-next-map,
+ 	its-set-next-map): Removed.
+	(its-make-next-state): New function.
+	(its-make-state): Removed.
+
+	* its.el (its-defrule-sub): Renamed from `its-defrule**'.
+
+	* wnnfns.h: New file.  Macros for WNN6 are defined here.
+	* wnn6fns.c: New file.  Moved from wnnfns.c for WNN6 specific
+ 	functions.
+
+1997-03-12  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnnfns.c: cosmetic changes (indentation, commenting-out-style,
+ 	and compare to Qnil, etc).
+	Get rid of "register" qualifier.
+
+1997-03-05  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-define-mode): Change internal structure.  Completely
+ 	rewritten.
+	(its-make-map): Function to make map.
+	(its-make-state): New function.  Make new state.
+	(its-make-KAS): New function.  Make Key-Action-State triad.
+	(its-state-terminalp): New function.  True when the state is
+ 	terminal.
+	(its-map-indicator, its-map-set-indicator,): Changed.
+	(its-map-terminalp, its-map-incrementalp,
+ 	its-map-set-incrementalp, its-map-alist, its-map-set-alist,
+ 	its-map-action, its-map-set-action): Removed.
+
+	(its-defrule-verbose): Deleted.  Seems debug purpose variable.
+
+	(its-make-map): Removed <state>.  It was useless space eater.
+	(its-map-indicator, its-map-set-indicator, its-map-alist,
+ 	its-map-set-alist, its-map-action, its-map-set-action): Follow the
+ 	change.
+	(its-define-mode): Likewise.
+	(its-defrule**): Change the argument.  Delete STATE.
+	(its-defrule): Likewise.
+	(its-map-state, its-map-set-state): Removed.
+
+	<topmap>: Changed the structure.  Introduce <incrementalp>, which
+ 	is t on hangul-map, zhuyin-map, and kanainput-map.
+	(its-define-mode): Change the arguments.  INDICATOR and RESET is 
+	always required.  Add new argument INCREMENTALP.
+	* its/kanainput.el ("kanainput"): Use new API of its-define-mode.
+	* its/hangul.el ("hangul"): Likewise.
+	* its/zhuyin.el ("zhuyin"): Likewise.
+	* its.el (its-make-terminal-state-sofar): Removed.
+	(its-default-make-terminal-state): Removed.
+	(its-make-terminal-state): Removed
+	(its-make-non-terminal-state): Removed.  Not used.
+	(its-map-incrementalp, its-map-set-incrementalp): New functions.
+	
+1997-03-04  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* its.el (its-defrule-conditional, its-defrule-conditional*):
+ 	Removed.  Evaluating cond clause at runtime is stupid.  Rules
+ 	should be determined at compile time, not at run time.
+	(its-get-action): Simplified.  It's always standard.
+	(its-make-terminal-state-sofar): Likewise.
+	(its-make-action): Renamed from its-make-standard-action.
+	(its-standard-actionp): Removed.  No use.
+	(its-translate-region): Simplified.
+
+	(its-map-topmap-p): Removed.  No use.
+
+	(its-simple-actionp, its-collect-simple-action): Removed. No use.
+
+	(its-insert-output-string, its-display-status-string): Removed.
+  	It seemd these variables is to debug ITS itself.
+	(its-translate-region): Simplified.
+	
+	* its/hira.el (".", ",", "n", "nn"): Rules should be determined at
+ 	compile time.
+	* its/han-kata.el: Likewise.
+	* its/kata.el: Likewise.
+
+	* its.el (its-make-standard-action): Simplified.
+	(its-make-standard-action): Remove alternative output.
+	(its-standard-actionp): Simplified.
+	(its-action-next): Simplified.
+	(its-select-alternative-output-menu): Removed.  Not used at all.
+	(its-select-alternative-output): Ditto.
+
+	* its/han-kata.el, its/zenkaku.el, its/kata.el, its/kanainput.el,
+ 	its/hira.el, its/hankaku.el: Add (require cl).
+
+	* its.el (its-enable-double-n-syntax, its-use-kuten-for-period,
+ 	its-use-touten-for-comma, its-zenkaku-escape, its-hankaku-escape):
+ 	Declare here.  Add prefix `its-'.  ):
+
+	(its-defrule, its-defrule*): Remove MAP argument.
+	Merged into its-defrule.
+
+1997-03-04  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* its.el (its-completing-input-menu): Removed.  Not used.
+	(its-completing-input): Ditto.
+	(its-translate-region): Remove (null action) clause.  It's identical
+	to 't' case.
+
+	(its-map-supers): Deleted.
+	(its-map-set-supers): Ditto.
+	(its-get-next-map-locally): Deleted.
+
+	(its-define-mode): Remove supers.
+	(its-make-map): Likewise.
+
+	(its-simulate-input): sref -> aref. add char-bytes -> +1.
+	(its-defrule**): Likewise.
+
+	(its-flush-input-before-point): Delete useless save-excursion.
+	(its-push-char): Likewise.
+	(its-translate-region): Likewise.
+
+	* its/zhuyin.el (its-make-terminal-state):
+	* its/kanainput.el (its-make-terminal-state):
+	* its/hangul.el (its-make-terminal-state):
+	Use its-make-terminal-state-sofar.
+
+	* its/kanainput.el (its-make-terminal-state-kanainput): Removed.
+
+	* its.el (its-make-terminal-state-sofar): Renamed.
+ 	(was: its-make-terminal-state-hangul)
+
+	* its/han-kata.el (its-select-hankaku-katakana): Renamed.
+	(was: its:select-hankaku-katakana).
+
+	* its.el (its-map-topmap-p, its-map-supers, its-map-set-supers,
+ 	its-map-terminalp, its-map-state, its-map-set-state,
+ 	its-map-indicator, its-map-set-indicator, its-map-action,
+ 	its-map-set-action, its-map-alist, its-map-set-alist,
+ 	its-get-action, its-action-output, its-action-next,
+ 	its-get-next-map, its-get-next-map-locally, its-set-next-map,
+ 	its-collect-simple-action, its-read-current-its-string,
+ 	its-make-map): Add prefix 'its-'.
+
+	* its.el (its-defrule-select-mode-temporally): Deleted.
+	(its-select-mode-temporally): Deleted.
+	(its-select-previous-mode): Deleted.
+
+	* its/hira.el ("q", "Q"): Removed.
+
+	* its.el (its-defrule**): Don't call coerce-internal-string.
+	(map-state-string): Removed.
+	(its-default-make-standard-non-terminal-state): Don't call
+ 	map-state-string.
+
+	* egg.el (characterp, coerce-internal-string, coerce-string): Removed.
+
+	* its.el (its-insert-char): Deleted.
+	(its-internal-mode-alist): Removed.
+	(its-set-mode-map, its-define-mode): Remove internalp.
+	(its-set-mode-indicator): Removed.
+
+	* egg-fence.el (egg-fence-self-insert-command): Add prefix 'egg-'.
+
+	* its.el (fence-self-insert-command): Move to egg-fence.el.
+
+	* egg-fence.el (egg-exit-fence-mode): Renamed (egg-fence-exit-mode).
+	(egg-enter-fence-mode-and-self-insert): Deleted.
+
+	* egg.el (egg-quit-egg-mode): Deleted.
+
+	* egg-misc.el (egg-fence-toggle-egg-mode): Add prefix 'egg-'.
+	(egg-fence-toggle-egg-mode): beep -> ding.
+	(global-map): bind C-\ to egg-enter-fence-mode.
+
+1997-03-02  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* egg-henkan.el: New file.
+
+	Use new API (egg-get-bunsetu-kanji, egg-get-bunsetu-yomi,
+ 	egg-is-dai-bunsetu, bunsetu-suu, egg-hindo-update,
+ 	egg-get-bunsetu-end).
+
+	* wnn-egg.el: Move egg-henkan-* to egg-henkan.el.
+
+	* wnn-egg.el (egg-startup-file-search-path): Remove current
+ 	directory.
+	(egg-open-wnn): Renamed from EGG-open-wnn.
+	(bunsetu-suu): New function.
+	(egg-get-bunsetu-kanji, egg-get-bunsetu-yomi): New function.
+	(egg-is-dai-bunsetu): New function.
+	(egg-hindo-update): New function.
+	(egg-get-bunsetu-end): New function.
+	
+	(egg-henkan-region, egg-gyaku-henkan-region,
+ 	egg-henkan-region-internal, egg-henkan-paragraph,
+ 	egg-gyaku-henkan-paragraph, egg-henkan-sentence,
+ 	egg-gyaku-henkan-sentence, egg-henkan-word, egg-gyaku-henkan-word,
+ 	egg-henkan-insert-kouho, egg-henkan-kakutei,
+ 	egg-henkan-kakutei-first-char, egg-henkan-kakutei-before-point,
+ 	egg-sai-henkan, egg-henkan-goto-bunsetu,
+ 	egg-henkan-forward-bunsetu, egg-henkan-backward-bunsetu,
+ 	egg-henkan-first-bunsetu, egg-henkan-last-bunsetu,
+ 	egg-henkan-hiragana, egg-henkan-katakana, egg-henkan-next-kouho,
+ 	egg-henkan-next-kouho-dai, egg-henkan-next-kouho-sho,
+ 	egg-henkan-previous-kouho, egg-henkan-previous-kouho-dai,
+ 	egg-henkan-previous-kouho-sho, egg-henkan-goto-kouho,
+ 	egg-henkan-bunsetu-chijime-dai, egg-henkan-bunsetu-chijime-sho,
+ 	egg-henkan-bunsetu-nobasi-dai, egg-henkan-saishou-bunsetu,
+ 	egg-henkan-saichou-bunsetu, egg-bunsetu-length-henko,
+ 	egg-henkan-quit, egg-henkan-select-kouho,
+ 	egg-henkan-select-kouho-dai, egg-henkan-select-kouho-sho,
+ 	egg-henkan-word-off, egg-henkan-kakutei-and-self-insert,
+ 	egg-henkan-mode-map, egg-henkan-mode-esc-prefix,
+ 	egg-henkan-help-command, egg-henkan-inspect-bunsetu):
+ 	Add prefix `egg-'.
+
+	(egg-henkan-mode-in-use): Deleted.
+	(set-egg-henkan-mode-format): Deleted.  Don't need.
+
+	(disconnect-wnn): Let it be normal function, instead of command.
+	(close-wnn): Ditto.
+
+	(set-jserver-host-name, set-kserver-host-name,
+ 	set-cserver-host-name): Use defalias.
+
+	(close-wnn): Take an argument of wnn-server-type.
+	(wnn-egg-kill-emacs-function, set-wnn-host-name,
+ 	set-cwnn-host-name, set-kwnn-host-name): Likewise.
+
+	* egg.el (egg-global-map-backup): Deleted.
+	(egg-local-map-backup): Deleted.
+	(egg-insert-after-hook): it's global variable, nod buffer-local.
+
+	* egg-fence.el (egg-henkan-fence-region, egg-enter-fence-mode,
+ 	egg-fence-katakana, egg-fence-hiragana, egg-fence-hankaku,
+ 	egg-fence-zenkaku, egg-fence-backward-char,
+ 	egg-fence-forward-char, egg-fence-beginning-of-line,
+ 	egg-fence-end-of-line, egg-fence-transpose-chars,
+ 	egg-fence-delete-char, egg-fence-backward-delete-char,
+ 	egg-fence-kill-line, egg-fence-exit-mode, egg-fence-cancel-input,
+ 	egg-fence-mode-help-command): Add Prefix `egg-'.
+
+	(egg-fence-mode-map): Remove binding to eval-expression (C-z).
+
+	(egg-self-insert-non-undo-count): Removed.
+	(egg-self-insert-command): Removed.
+
+	(egg-fence-backward-char, egg-fence-forward-char,
+ 	egg-fence-transpose-chars, egg-fence-delete-char,
+ 	egg-fence-backward-delete-char): beep -> ding.
+	wnn-egg.el (egg-henkan-select-kouho): Likewise.
+
+1997-02-27  NIIBE Yutaka  <gniibe@chroot.org>
+
+	* wnn-egg.el (push-end, push-end-internal): Removed.
+
+	* its.el (dolist): Removed.  It's in CL package.
+	(for-each, for-each*): Removed.
+
+	* egg-keymap.el: Removed.  I guess noone use it.
+
+	* egg-jsymbol.el (*-alist): Declare by defconst.
+
+	* egg-misc.el (toggle-egg-mode): Removed.
+
+	* All files: Change the identifier XXX:YYYY --> XXX-YYYY,
+	and *YYY* ---> YYY.
+
+	* egg-fence.el (enter-fence-mode): Use new API for marker
+ 	insertion `set-marker-insertion-type'.
+	* its.el (its-*buff-e*): Likewise.
+
+	* egg-jsymbol.el: lc-jp --> (charset-id 'japanese-jisx0208)
+	lc-jp2 --> (charset-id 'japanese-jisx0212).
+
+1997-02-26  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* egg-fence.el (egg:fence-mode-map): Renamed from fence-mode-map.
+	(egg:fence-mode-esc-prefix): Renamed from egg:fence-mode-esc-map.
+	(henkan-fence-region-or-single-space): Removed.
+
+	* egg-misc.el (toggle-egg-mode): mc-flag
+	 	-> enable-multibyte-characters.
+
+	* its.el (read-current-its-string): New function.  Moved from
+ 	wnn-egg-misc.el.
+	(In meny functions): beep --> ding.
+
+	* egg-misc.el (read-hiragana-string): Removed.
+	(read-kanji-string): Removed.
+	(egg:special-symbol-input): Renamed from special-symbol-input.
+	(egg:special-symbol-input-point): Renamed from
+ 	special-symbol-input-point.
+	(si:*global-map*): Remeved.
+	Removed 'Changes on Global map'.
+	(its-mode-map): Renamed from mule-keymap.
+
+	* wnn-egg.el (henkan-region-internal): Use new API for undo.
+	(henkan-kakutei): Likewise.
+	(henkan-kakutei-first-char): Likewise.
+	(henkan-kakutei-before-point): Likewise.
+	(sai-henkan): Likewise.
+	* egg.el (egg:quit-egg-mode): Likewise.
+
+	* egg-fence.el (egg:*fence-open*, egg:*fence-close*,
+ 	egg:*fence-face*): Let them be declared by defvar.
+	(egg:*fence-open-in-cont*, egg:*fence-close-in-cont*,
+ 	egg:*fence-face-in-cont*): Likewise.
+
+	(set-egg-fence-mode-format): Removed.  Useless.  Don't need to be
+ 	interactive.
+	(set-egg-fence-mode-format-in-cont): Removed.
+	(egg:*face-alist*): Removed.
+
+	* wnn-egg-misc.el (its:select-mode, its:select-mode-from-menu,
+	its:next-mode, its:previous-mode): 
+	Removed (Merged into its.el).  
+
+	* its.el (its:select-mode, its:select-mode-from-menu,
+ 	its:next-mode, its:previous-mode): Call hook of
+ 	`its:select-mode-hook'.
+
+	* diced.el: Removed.  This depends on wnn.  Functions are moved to
+	wnn-egg-dict.el.
+
+	* wnn-egg-dict.el (remove-regexp-in-string): Removed.
+	(toroku-region): Don't call `remove-regexp-in-string'.  Removing
+ 	invalid sequence (TAB?) automatically is not good idea.  It should
+ 	notify user.  Currently, just don't remove.
+
+	* busyu.el (busyu-table): defconst instead of defvar.
+	(busyu-kaku-alist): defconst instead of defvar.
+
+	* its.el (egg:member): Removed.  Not used.
+
+	* wnn-egg-msg.el (*egg-message-alist*): Include asking string in
+ 	register-notify and remove-notify.  Should also change Korean and
+ 	Chinese.
+
+	* egg.el: Removed "Tamago Notification System".
+ 	It is useless, as we have *Messages* buffer in GNU Emacs 19.
+
+	* diced.el (diced-execute): Don't use `notify' but `message'.
+	(set-dict-comment): Likewise.
+	* its.el (its-defrule**): Likewise.
+	* wnn-egg-dict.el (egg:toroku-word): Likewise.
+	* wnn-egg-msg.el (egg:error): Likewise.
+	* wnn-egg.el (set-wnn-param): Likewise.
+	(EGG:open-wnn): Likewise.
+	(close-wnn): Likewise.
+	(henkan-word-off): Likewise.
+	(henkan-inspect-bunsetu): Likewise.
+
+	* diced.el (diced-execute): Don't use `notify-yes-or-no-p' but use
+	plain `yes-or-no-p' and format.
+	* wnn-egg-dict.el (egg:toroku-word): Likewise.
+
+	* egg.el (notify-yes-or-no-p-internal): IIDESUKA is not good.
+	it should get the message through egg:get-msg.  Currently, use
+	"OK?".
+	(notify-y-or-n-p-internal): Likewise.
+
+	* wnn-egg.el: Split into wnn-egg-dict.el, wnn-egg-misc.el, and
+	wnn-egg-msg.el.
+	(many functions): remove commented out line of
+	 	(open-wnn-if-disconnected).
+
+	* egg.el: Split into egg.el, egg-fence.el, egg-misc.el,
+ 	jis-input.el, and modeline.el.
+
+	* wnn-egg.el (egg-default-startup-file): change to eggrc-wnn from
+ 	eggrc.
+	(henkan-region-internal): Use new API for marker insertion
+ 	`set-marker-insertion-type'.
+
+1997-02-13  NIIBE Yutaka  <gniibe@akebono.etl.go.jp>
+
+	* menu.el (menu:select-from-menu): Rewritten.

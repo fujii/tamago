@@ -1,0 +1,60 @@
+2002-09-09  NIIBE Yutaka  <gniibe@m17n.org>
+
+	Check JIS x0213 support at compile time.
+	* check-jisx0213.el: New file.
+	* configure.in: Check if JIS X0213 is supported or not.
+	* Makefile.in (TOPSRCS): Remove egg-x0213.el.
+	(DEPS): Don't load jisx0213.el.
+	(ITSSRCS): Removed its/aynu.el.
+	(AYNU): New variable.
+
+	Bug fix.
+	* its/thai.el (its-thai-add-vowel, its-thai-add-tone): Bug fixes.
+	Just call compose-string.
+	
+2002-08-26  ISHIKAWA Mutsumi <ishikawa@linux.or.jp>, 
+	Takahiro Kambe <taca@sky.yamashina.kyoto.jp>, 
+	Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* Makefile.in (TOPSRCS): Remove	egg-util.el.  Added egg-x0213.el.
+	(ITSSRCS): Added its/greek.el
+	its/greek.elc: Depends on its-keydef.elc.
+
+2002-08-23  NIIBE Yutaka  <gniibe@m17n.org>
+
+	* AUTHORS (NIIBE Yutaka): Updated.
+	* egg-mlh.el: Update e-mail address.
+
+	* leim-list.el: Removed eval-when contstuct.  Reoved "loading
+	another" feature.
+	(egg-activate-anthy): Added.
+
+2002-08-23  Katsumi Yamaoka  <yamaoka@jpl.org>, NIIBE Yutaka  <gniibe@m17n.org>
+
+	* egg-util.el: Removed.
+
+2002-08-08  NIIBE Yutaka  <gniibe@m17n.org>
+
+	* Makefile.in (EGGSRCS): Added anthy.el and anthyipc.el
+	(srcdir, top_srcdir, VPATH): Added.
+	(DEPS): Use top_srcdir.
+
+	Added ANTHY support.
+	* egg/anthy.el egg/anthyipc.el: New files.
+	* leim-list.el: Added anthy.
+
+2002-08-02  SAITO Takuya <reed@lily.freemail.ne.jp>
+
+	* its.el (its-previous-line): point-mim -> point-min (typo)
+
+2002-07-20  SAITO Takuya <reed@lily.freemail.ne.jp>
+
+	* egg.el (egg-activate-keymap-after-command): set-buffer to
+	killed buffer.
+
+2002-05-08  Katsumi Yamaoka  <yamaoka@jpl.org> (cf. [mule-ja:08306])
+
+	* its.el (its-next-line, its-previous-line): New commands;
+	substitute key definitions for `next-line' and `previous-line'
+	with them in `its-mode-map'.
+

@@ -1,0 +1,6 @@
+*~
+*.elc
+Makefile
+config.cache
+config.log
+config.status

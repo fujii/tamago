@@ -642,8 +642,8 @@ mode, if non-NIL."
 			       'egg-lang           language
 			       'egg-bunsetsu-last  last
 			       'egg-major-continue continue
-			       'point-entered      'egg-enter/leave-fence
-			       'point-left         'egg-enter/leave-fence
+                   'cursor-sensor-functions '((lambda (window pos event)
+                                                (egg-enter/leave-fence)))
 			       'modification-hooks '(egg-modify-fence))
 			 converted)
     (if face
